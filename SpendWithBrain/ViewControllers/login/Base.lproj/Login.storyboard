@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Regular.ttf">
+            <string>Montserrat-Regular</string>
+        </array>
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController storyboardIdentifier="Login" id="BYZ-38-t0r" customClass="LoginViewController" customModule="SpendWithBrain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eiR-yB-Z28">
+                                <rect key="frame" x="18.666666666666657" y="121.66666666666669" width="337.66666666666674" height="568.66666666666652"/>
+                                <subviews>
+                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="Rx9-Ww-a1f">
+                                        <rect key="frame" x="119.33333333333331" y="19.999999999999986" width="99" height="99"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="99" id="Fws-c9-eLI"/>
+                                            <constraint firstAttribute="width" secondItem="Rx9-Ww-a1f" secondAttribute="height" multiplier="1:1" id="Lxg-hB-Jlv"/>
+                                        </constraints>
+                                    </imageView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="Lcm-c2-ppH" userLabel="Inputs">
+                                        <rect key="frame" x="0.0" y="185" width="337.66666666666669" height="142.33333333333337"/>
+                                        <subviews>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="rEI-2f-Hgy" userLabel="email" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                                <rect key="frame" x="0.0" y="0.0" width="337.66666666666669" height="56.333333333333336"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                                </variation>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="jQn-P2-GXo" userLabel="password" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                                <rect key="frame" x="0.0" y="86.333333333333314" width="337.66666666666669" height="56"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                                </variation>
+                                            </textField>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BeK-yT-hCC">
+                                        <rect key="frame" x="82.666666666666643" y="345.33333333333331" width="172.33333333333337" height="31"/>
+                                        <color key="backgroundColor" name="Red"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                        <state key="normal" title="Login">
+                                            <color key="titleColor" name="White"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="loginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="FcC-Wu-Wjd"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your credentials to become again active " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LzC-4G-QAG" userLabel="label">
+                                        <rect key="frame" x="44.333333333333314" y="153" width="249" height="14"/>
+                                        <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="12"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Montserrat-Regular" family="Montserrat" pointSize="30"/>
+                                        </variation>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Lcm-c2-ppH" firstAttribute="width" secondItem="eiR-yB-Z28" secondAttribute="width" id="5HQ-ES-yRd"/>
+                                    <constraint firstItem="Lcm-c2-ppH" firstAttribute="centerX" secondItem="eiR-yB-Z28" secondAttribute="centerX" id="7s1-8K-HxB"/>
+                                    <constraint firstItem="BeK-yT-hCC" firstAttribute="centerX" secondItem="eiR-yB-Z28" secondAttribute="centerX" id="81o-os-TC2"/>
+                                    <constraint firstItem="Lcm-c2-ppH" firstAttribute="height" secondItem="eiR-yB-Z28" secondAttribute="height" multiplier="0.25" id="COm-3n-uRk"/>
+                                    <constraint firstItem="LzC-4G-QAG" firstAttribute="centerX" secondItem="eiR-yB-Z28" secondAttribute="centerX" id="Dxm-kH-Vry"/>
+                                    <constraint firstItem="Rx9-Ww-a1f" firstAttribute="top" secondItem="eiR-yB-Z28" secondAttribute="top" constant="20" id="Oah-2C-HGg"/>
+                                    <constraint firstItem="BeK-yT-hCC" firstAttribute="centerX" secondItem="eiR-yB-Z28" secondAttribute="centerX" id="TUc-rk-GWF"/>
+                                    <constraint firstItem="Rx9-Ww-a1f" firstAttribute="centerX" secondItem="eiR-yB-Z28" secondAttribute="centerX" id="aUW-qq-tDh"/>
+                                    <constraint firstItem="BeK-yT-hCC" firstAttribute="width" secondItem="eiR-yB-Z28" secondAttribute="width" multiplier="0.4" constant="37.600000000000065" id="eAB-IV-Ms3"/>
+                                    <constraint firstItem="Lcm-c2-ppH" firstAttribute="top" secondItem="LzC-4G-QAG" secondAttribute="bottom" constant="18" id="gHm-cB-MOk"/>
+                                    <constraint firstItem="LzC-4G-QAG" firstAttribute="top" secondItem="Rx9-Ww-a1f" secondAttribute="bottom" constant="34" id="uvv-as-5Vj"/>
+                                    <constraint firstItem="BeK-yT-hCC" firstAttribute="top" secondItem="Lcm-c2-ppH" secondAttribute="bottom" constant="18" id="wCy-sY-mkS"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ICE-Lw-dbV" userLabel="ForgotRegister">
+                                <rect key="frame" x="79.333333333333329" y="690.66666666666663" width="216.33333333333337" height="57.333333333333371"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YBh-ca-ICL">
+                                        <rect key="frame" x="0.0" y="0.0" width="216.33333333333334" height="24.666666666666668"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                        <state key="normal" title="Forgot yur password?">
+                                            <color key="titleColor" name="Red"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                        </variation>
+                                        <connections>
+                                            <segue destination="Mc4-aD-nPn" kind="show" id="qIo-5k-0K9"/>
+                                        </connections>
+                                    </button>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fEn-6a-c37">
+                                        <rect key="frame" x="0.0" y="32.666666666666742" width="216.33333333333334" height="24.666666666666671"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have no account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voi-CO-Ujg">
+                                                <rect key="frame" x="0.0" y="0.0" width="148.33333333333334" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                                </variation>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M74-zi-hu1">
+                                                <rect key="frame" x="156.33333333333331" y="0.0" width="60" height="24.666666666666668"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <state key="normal" title="Register">
+                                                    <color key="titleColor" name="Red"/>
+                                                </state>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                                </variation>
+                                                <connections>
+                                                    <segue destination="CFQ-zt-VcZ" kind="show" id="Dx4-eG-8qn"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" name="MainGreen"/>
+                        <constraints>
+                            <constraint firstItem="eiR-yB-Z28" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5e4-rw-PRa"/>
+                            <constraint firstItem="eiR-yB-Z28" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="8SH-6o-Hez"/>
+                            <constraint firstItem="ICE-Lw-dbV" firstAttribute="top" secondItem="eiR-yB-Z28" secondAttribute="bottom" constant="0.33333333333337123" id="BPy-Yq-TAT"/>
+                            <constraint firstItem="ICE-Lw-dbV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EPE-EE-RQa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="lessThanOrEqual" secondItem="ICE-Lw-dbV" secondAttribute="bottom" constant="30" id="FFN-7W-cyq"/>
+                            <constraint firstItem="eiR-yB-Z28" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.7" id="JfS-b0-vX1"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ICE-Lw-dbV" secondAttribute="bottom" constant="30" id="N7H-2G-LBD"/>
+                            <constraint firstItem="eiR-yB-Z28" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Qg0-N2-25s"/>
+                            <constraint firstItem="ICE-Lw-dbV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yhk-Dv-uQY"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="rEI-2f-Hgy" id="Jaq-9P-3L3"/>
+                        <outlet property="loginBtn" destination="BeK-yT-hCC" id="qnH-Wj-AoN"/>
+                        <outlet property="passField" destination="jQn-P2-GXo" id="LIb-Cl-BxQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-640.57971014492762" y="123.91304347826087"/>
+        </scene>
+        <!--Register-->
+        <scene sceneID="B6d-0c-RDB">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Register" id="CFQ-zt-VcZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5FJ-8Y-zQr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="114" y="125"/>
+        </scene>
+        <!--Reset-->
+        <scene sceneID="I4d-rb-QuF">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Reset" id="Mc4-aD-nPn" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fBw-IN-xgK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="101" y="185"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="432" height="432"/>
+        <namedColor name="Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainGreen">
+            <color red="0.10196078431372549" green="0.66274509803921566" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.96078431372549022" green="0.45098039215686275" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

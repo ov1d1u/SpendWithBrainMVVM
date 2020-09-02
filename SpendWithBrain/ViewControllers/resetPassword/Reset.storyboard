@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KYt-S9-ChM">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Roboto-Regular.ttf">
+            <string>Roboto-Regular</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Reset View Controller-->
+        <scene sceneID="vAs-Yr-cB5">
+            <objects>
+                <viewController id="KYt-S9-ChM" customClass="ResetViewController" customModule="SpendWithBrain" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lPL-Rq-r7U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g9X-Cb-ghd">
+                                <rect key="frame" x="18.666666666666657" y="185.66666666666666" width="337.66666666666674" height="440.66666666666674"/>
+                                <subviews>
+                                    <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="E7h-Rd-Aai">
+                                        <rect key="frame" x="120" y="20" width="98" height="98"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="98" id="MpI-HD-faX"/>
+                                            <constraint firstAttribute="width" secondItem="E7h-Rd-Aai" secondAttribute="height" multiplier="1:1" id="bjI-Vt-fmQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need your email to send the instructions to reset password" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iz1-ji-28O" userLabel="label">
+                                        <rect key="frame" x="8" y="177.33333333333334" width="321.66666666666669" height="40.666666666666657"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                        <color key="textColor" name="Black"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="it6-Fp-yfs">
+                                        <rect key="frame" x="101.33333333333331" y="375.66666666666674" width="135" height="44.333333333333314"/>
+                                        <color key="backgroundColor" name="Red"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                        <state key="normal" title="Reset Password">
+                                            <color key="titleColor" name="White"/>
+                                        </state>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="resetBtnClick:" destination="KYt-S9-ChM" eventType="touchUpInside" id="clN-ji-oBi"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="coa-U4-loi" userLabel="email" customClass="HoshiTextField" customModule="TextFieldEffects">
+                                        <rect key="frame" x="0.0" y="259" width="337.66666666666669" height="66"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="30"/>
+                                        </variation>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Iz1-ji-28O" firstAttribute="top" secondItem="E7h-Rd-Aai" secondAttribute="bottom" priority="250" constant="8" id="7sk-ia-qfH"/>
+                                    <constraint firstAttribute="bottom" secondItem="it6-Fp-yfs" secondAttribute="bottom" constant="20.666666666666742" id="DL7-u5-Sfl"/>
+                                    <constraint firstItem="coa-U4-loi" firstAttribute="leading" secondItem="g9X-Cb-ghd" secondAttribute="leading" id="JxC-FT-TGH"/>
+                                    <constraint firstItem="Iz1-ji-28O" firstAttribute="centerX" secondItem="E7h-Rd-Aai" secondAttribute="centerX" id="LGs-cC-Dlr"/>
+                                    <constraint firstItem="it6-Fp-yfs" firstAttribute="width" secondItem="g9X-Cb-ghd" secondAttribute="width" multiplier="0.4" id="Pcy-Rr-nY4"/>
+                                    <constraint firstItem="it6-Fp-yfs" firstAttribute="centerX" secondItem="g9X-Cb-ghd" secondAttribute="centerX" id="YjV-LA-wlW"/>
+                                    <constraint firstItem="coa-U4-loi" firstAttribute="top" secondItem="Iz1-ji-28O" secondAttribute="bottom" constant="41" id="ZHz-Nx-aKw"/>
+                                    <constraint firstItem="Iz1-ji-28O" firstAttribute="leading" secondItem="g9X-Cb-ghd" secondAttribute="leadingMargin" id="ZKF-rN-jz5"/>
+                                    <constraint firstItem="Iz1-ji-28O" firstAttribute="top" relation="greaterThanOrEqual" secondItem="E7h-Rd-Aai" secondAttribute="bottom" constant="8" id="ZbZ-oW-2QP"/>
+                                    <constraint firstItem="it6-Fp-yfs" firstAttribute="height" secondItem="g9X-Cb-ghd" secondAttribute="height" multiplier="0.1" id="a8u-Bu-CrR"/>
+                                    <constraint firstItem="E7h-Rd-Aai" firstAttribute="centerX" secondItem="g9X-Cb-ghd" secondAttribute="centerX" id="aZi-yv-TW1"/>
+                                    <constraint firstAttribute="trailing" secondItem="coa-U4-loi" secondAttribute="trailing" id="gwu-Nb-0s0"/>
+                                    <constraint firstItem="Iz1-ji-28O" firstAttribute="centerX" secondItem="g9X-Cb-ghd" secondAttribute="centerX" id="hAO-nl-EcH"/>
+                                    <constraint firstItem="E7h-Rd-Aai" firstAttribute="top" secondItem="g9X-Cb-ghd" secondAttribute="top" constant="20" id="mFZ-1v-CmW"/>
+                                    <constraint firstItem="it6-Fp-yfs" firstAttribute="top" secondItem="coa-U4-loi" secondAttribute="bottom" constant="50.666666666666686" id="mdd-Gi-Fz2"/>
+                                    <constraint firstItem="coa-U4-loi" firstAttribute="centerX" secondItem="g9X-Cb-ghd" secondAttribute="centerX" id="mst-j0-ijN"/>
+                                    <constraint firstItem="coa-U4-loi" firstAttribute="height" secondItem="g9X-Cb-ghd" secondAttribute="height" multiplier="0.15" id="tsn-OB-DYS"/>
+                                    <constraint firstAttribute="trailingMargin" secondItem="Iz1-ji-28O" secondAttribute="trailing" id="xjy-qY-4XC"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" name="MainGreen"/>
+                        <constraints>
+                            <constraint firstItem="g9X-Cb-ghd" firstAttribute="centerX" secondItem="lPL-Rq-r7U" secondAttribute="centerX" id="HyC-qv-IUE"/>
+                            <constraint firstItem="g9X-Cb-ghd" firstAttribute="height" secondItem="uq0-ae-MHU" secondAttribute="height" multiplier="0.6" id="RoI-xX-kZ1"/>
+                            <constraint firstItem="g9X-Cb-ghd" firstAttribute="width" secondItem="uq0-ae-MHU" secondAttribute="width" multiplier="0.9" id="iGa-x4-EgG"/>
+                            <constraint firstItem="g9X-Cb-ghd" firstAttribute="centerY" secondItem="lPL-Rq-r7U" secondAttribute="centerY" id="jWL-Rx-Mad"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="uq0-ae-MHU"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailField" destination="coa-U4-loi" id="wVh-9n-MY3"/>
+                        <outlet property="resetBtn" destination="it6-Fp-yfs" id="LLx-BO-NBb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fhy-Fo-ntx" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-640.79999999999995" y="123.39901477832512"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="logo" width="432" height="432"/>
+        <namedColor name="Black">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="MainGreen">
+            <color red="0.10196078431372549" green="0.66274509803921566" blue="0.44705882352941179" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Red">
+            <color red="0.96078431372549022" green="0.45098039215686275" blue="0.078431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="White">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
