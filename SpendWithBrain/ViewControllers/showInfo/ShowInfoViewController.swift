@@ -19,20 +19,21 @@ class ShowInfoViewController: UIViewController{
     @IBOutlet weak var details: UILabel!
     @IBOutlet weak var photoImg: UIImageView!
     
-    private var cell : CustomTableViewCell?
+    private var cellViewModel : CellViewModel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cell != nil {
-            catImg.image = cell?.imgCat.image
-            catLbl.text = cell?.category.text
-            details.text = cell?.details
-            let amountTxt = cell!.amount.text!
+        if cellViewModel != nil {
+            catImg.image = cellViewModel?.imageCategory
+            catLbl.text = cellViewModel?.category
+            let amountTxt = cellViewModel!.amount
             let absValAmount = abs(Double(amountTxt)!)
             amount.text = String(absValAmount)
             let dateFormat = DateFormatter()
             dateFormat.dateFormat = "yyyy-MM-dd at HH:mm"
-            date.text = String(dateFormat.string(from: (cell?.date)!))
-            photoImg.image = Utils.getImage(imageName: (cell?.imagePath)!)
+            date.text = dateFormat.string(from: (cellViewModel?.expense.date)!)
+            details.text = cellViewModel?.expense.details
+            photoImg.image = Utils.getImage(imageName: (cellViewModel?.expense.image)!)
         }
         stackCat.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
         stackCat.layer.cornerRadius = 4
@@ -42,22 +43,19 @@ class ShowInfoViewController: UIViewController{
         container.backgroundColor = #colorLiteral(red: 1, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
     }
     
-    func setData(_ cell : CustomTableViewCell){
-        self.cell = cell
+    func setData(_ cell : CellViewModel){
+        self.cellViewModel = cell
     }
     @IBAction func deleteClick(_ sender: UIButton) {
-        Utils.deleteDirectory(directoryName: (cell?.imagePath)!)
-        LocalDataBase.deleteExpense((cell?.date)!)
+        Utils.deleteDirectory(directoryName: (cellViewModel?.expense.image)!)
+        LocalDataBase.deleteExpense((cellViewModel?.expense.date)!)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
         dismiss(animated: true)
     }
     
     @IBAction func editClick(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "editOpen"), object: nil, userInfo : ["cell" : cell!])
-        //let editVC = Navigation.getEditViewController(cell!)
-        //present(editVC,animated: true)
-        //self.navigationController?.pushViewController(editVC, animated: true)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "editOpen"), object: nil, userInfo : ["cell" : cellViewModel!])
         dismiss(animated: true)
     }
     

@@ -32,7 +32,7 @@ class Navigation: UITabBarController {
     }
     
     @objc func goToEdit(_ notification: Notification) {
-        if let recievedCell = notification.userInfo!["cell"] as? CustomTableViewCell{
+        if let recievedCell = notification.userInfo!["cell"] as? CellViewModel{
             let vc = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "edit") as! EditViewController
             vc.cell = recievedCell
             self.navigationController?.pushViewController(vc, animated: true)
@@ -43,10 +43,11 @@ class Navigation: UITabBarController {
         let vc = UIStoryboard(name: "Converter", bundle: nil).instantiateViewController(withIdentifier: "Converter") as! ConverterViewController
         return vc
     }
-    
-    class func getEditViewController(_ cell : CustomTableViewCell) -> EditViewController{
+    class func presentEdit() -> EditViewController{
         let vc = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "edit") as! EditViewController
-        vc.cell = cell
         return vc
+    }
+    func navigateTo(vc : UIViewController){
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -16,9 +16,24 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var imgCat: UIImageView!
     @IBOutlet weak var containerView: UIView!
-    var details : String?
-    var imagePath : String?
-    var date : Date?
+    var cellViewModel : CellViewModel! {
+        didSet{
+            dateOfExp.text = cellViewModel.day
+            amount.text = cellViewModel.amount
+            if Double(cellViewModel.amount)! < 0.0 {
+                amount.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+            }else{
+                amount.textColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
+            }
+            incExp.text = cellViewModel.type
+            category.text = cellViewModel.category
+            imgCat.image = cellViewModel.imageCategory
+            soldAfterExp.text = cellViewModel.soldAfter
+            if Double(cellViewModel.soldAfter)! < 0.0 {
+                soldAfterExp.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+            }
+        }
+    }
     override func awakeFromNib() {
         super.awakeFromNib()
                 containerView.layer.cornerRadius = 4

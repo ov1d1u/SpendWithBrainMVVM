@@ -10,7 +10,7 @@ import UIKit
 import TextFieldEffects
 
 class EditViewController: UIViewController , setAmountFromConverter {
-    var cell : CustomTableViewCell?
+    var cell : CellViewModel?
     
     @IBOutlet weak var amount: HoshiTextField!
     @IBOutlet var categoryViewArray: [UIView]!
@@ -52,15 +52,12 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     private func fillData() {
-        dataPicker.date = (cell?.date)!
-        let amountTxt = converterResponse ?? cell!.amount.text!
-        let absValAmount = abs(Double(amountTxt)!)
-        amount.text = String(absValAmount)
-        currentCategory = (cell?.category.text).map { CategoryEnum(rawValue: $0) }!
+        dataPicker.date = (cell?.expense.date)!
+        amount.text = converterResponse ?? String(cell!.expense.amount)
+        currentCategory = (cell?.category).map { CategoryEnum(rawValue: $0) }!
         selectCurrentCategory()
-        detailsInput.text = cell?.details
-        imagePath = cell?.imagePath
-        print("incarc imaginea din fillData")
+        detailsInput.text = cell?.expense.details
+        imagePath = cell?.expense.image
         imageView.image = Utils.getImage(imageName: (imagePath)!)
     }
     
@@ -123,7 +120,7 @@ class EditViewController: UIViewController , setAmountFromConverter {
     @objc private func saveClick(){
         if checkInputs() {
             let newExpense = Expense(date:dataPicker.date ,amount:Float(amount.text!)!,category:currentCategory!,details:detailsInput.text!,image:imagePath ?? "Fara poza")
-            LocalDataBase.deleteExpense(cell!.date!)
+            //LocalDataBase.deleteExpense(cell!.date!)
             var userInfo = LocalDataBase.getUserInfo()
             if userInfo != nil{
                 userInfo!.expenses.append(newExpense)

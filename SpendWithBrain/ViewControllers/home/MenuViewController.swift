@@ -29,8 +29,6 @@ class MenuViewController: UIViewController {
     
     @IBAction func converterClick(_ sender: UIButton) {
         print("SideMenu ->Go to Converter screen")
-        //let converter = Navigation.presentConverter()
-        //self.navigationController?.pushViewController(converter, animated: true)
         NotificationCenter.default.post(name: Notification.Name(rawValue: "converterOpen"), object: nil)
         dismiss(animated: true, completion: nil)
     }
