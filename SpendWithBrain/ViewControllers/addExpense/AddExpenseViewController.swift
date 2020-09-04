@@ -18,9 +18,16 @@ class AddExpenseViewController: UIViewController{
     @IBOutlet weak var imageView: UIImageView!
     private var imagePath : String?
     
+    var cell : CellViewModel!{
+        didSet{
+            imageView.image = Utils.getImage(imageName: cell.expense.image)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeScreen()
+        cell = CellViewModel()
     }
     
     
@@ -42,34 +49,26 @@ class AddExpenseViewController: UIViewController{
         }
     }
     
+    @IBAction func didSelectDate(_ sender: UIDatePicker) {
+        cell.expense.date = dataPicker.date
+    }
+    
+    @IBAction func amountDidChanged(_ sender: HoshiTextField) {
+        cell.expense.amount = Float(sender.text!)!
+    }
+    
+    @IBAction func detailsDidChanged(_ sender: UITextField) {
+        cell.expense.details = sender.text!
+    }
+    
+    
+    
     @IBAction func addImageClick(_ sender: UIButton) {
         showImagePickerControllerActionSheet()
     }
     
     @IBAction func removeImage(_ sender: UIButton) {
-        imagePath = nil
-        imageView.image = #imageLiteral(resourceName: "chitanta")
-    }
-    
-    private func checkAllInputs()-> Bool{
-        var allowSave = true
-        var errorMesage = ""
-        if currentCategory == nil {
-            allowSave = false
-            errorMesage.append("Select one category.\n")
-        }
-        if !Validations.amountValid(amountInput.text!){
-            allowSave = false
-            errorMesage.append("Get amount for this expense.\n")
-        }
-        if detailsInput.text!.count == 0 {
-            allowSave = false
-            errorMesage.append("Please, get some details about this expense.\n")
-        }
-        if errorMesage.count > 0 {
-            AlertService.showAlert(style: .alert, title: "Error", message: errorMesage)
-        }
-        return allowSave
+        cell.expense.image = "Fara poza"
     }
     
     @objc func selectOneCategory(_ sender:UITapGestureRecognizer){
@@ -78,19 +77,8 @@ class AddExpenseViewController: UIViewController{
             if item == thisView {
                 item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 if let label = item.subviews[1] as? UILabel{
-                    switch label.text! {
-                    case "Income" : currentCategory = .Income
-                        case "Food" : currentCategory = .Food
-                        case "Car" : currentCategory = .Car
-                        case "Clothes" : currentCategory = .Clothes
-                        case "Savings" : currentCategory = .Savings
-                        case "Health" : currentCategory = .Health
-                        case "Beauty" : currentCategory = .Beauty
-                        case "Travel" : currentCategory = .Travel
-                    default:
-                        currentCategory = .Income
-                    }
-                    print("AddExpense -> User selected \(currentCategory!) for this expense")
+                    cell.expense.category = CategoryEnum(rawValue: label.text!)!
+                    print("AddExpense -> User selected \(String(describing: cell.expense.category)) for this expense")
                 }
             }else{
                 item.layer.borderColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
@@ -99,28 +87,14 @@ class AddExpenseViewController: UIViewController{
     }
     
     @objc private func saveClick(){
-        if checkAllInputs(){
-            let newExpense = Expense(date:dataPicker.date ,amount:Float(amountInput.text!)!,category:currentCategory!,details:detailsInput.text!,image:imagePath ?? "Fara poza")
-            var userInfo = LocalDataBase.getUserInfo()
-            if userInfo != nil{
-                userInfo!.expenses.append(newExpense)
-                if LocalDataBase.updateUserInfo(for: userInfo!){
-                    print("AddExpense -> Succesfull update info for \(userInfo!.name)")
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
-                    _ = navigationController?.popToRootViewController(animated: true)
-                }else{
-                    print("AddExpense -> Didnt update info for \(userInfo!.name)")
-                }
-            }else{
-                print("AddExpense -> I dont recieve info about current user , sorry")
-            }
-            
+        let (errorTitle,errorMessage) = cell.isExpenseValid()
+        if errorMessage.count<1 {
+            cell.saveNewExpense()
+            _ = navigationController?.popViewController(animated: true)
         }else{
-            print("AddExpense -> Please get amount , details and select category for expense")
+            AlertService.showAlert(style: .alert, title: errorTitle, message: errorMessage)
         }
     }
-
 }
 
 
@@ -146,14 +120,12 @@ extension AddExpenseViewController : UIImagePickerControllerDelegate , UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            imageView.image = editedImage
-            imagePath = Utils.saveImageToDocumentDirectory(image : editedImage)
+            cell.expense.image = Utils.saveImageToDocumentDirectory(image: editedImage)
             
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            imageView.image = originalImage
-            imagePath = Utils.saveImageToDocumentDirectory(image : originalImage)
+            cell.expense.image = Utils.saveImageToDocumentDirectory(image: originalImage)
         }
-        print(imagePath!)
+        print("image for expense was added")
         dismiss(animated: true)
     }
 }

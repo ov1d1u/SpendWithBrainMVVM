@@ -19,22 +19,21 @@ class ShowInfoViewController: UIViewController{
     @IBOutlet weak var details: UILabel!
     @IBOutlet weak var photoImg: UIImageView!
     
-    private var cellViewModel : CellViewModel?
+    var cellRecieve : CellViewModel?
+    var cellViewModel : CellViewModel!{
+        didSet{
+            catImg.image = cellViewModel.imageCategory
+            catLbl.text = cellViewModel.category
+            amount.text = String(cellViewModel.expense.amount)
+            date.text = cellViewModel.getDateFormatForInfo()
+            details.text = cellViewModel.expense.details
+            photoImg.image = Utils.getImage(imageName: (cellViewModel.expense.image))
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cellViewModel != nil {
-            catImg.image = cellViewModel?.imageCategory
-            catLbl.text = cellViewModel?.category
-            let amountTxt = cellViewModel!.amount
-            let absValAmount = abs(Double(amountTxt)!)
-            amount.text = String(absValAmount)
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd at HH:mm"
-            date.text = dateFormat.string(from: (cellViewModel?.expense.date)!)
-            details.text = cellViewModel?.expense.details
-            photoImg.image = Utils.getImage(imageName: (cellViewModel?.expense.image)!)
-        }
+        cellViewModel = cellRecieve!
         stackCat.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
         stackCat.layer.cornerRadius = 4
         stackCat.layer.borderWidth = 1
@@ -44,13 +43,10 @@ class ShowInfoViewController: UIViewController{
     }
     
     func setData(_ cell : CellViewModel){
-        self.cellViewModel = cell
+        self.cellRecieve = cell
     }
     @IBAction func deleteClick(_ sender: UIButton) {
-        Utils.deleteDirectory(directoryName: (cellViewModel?.expense.image)!)
-        LocalDataBase.deleteExpense((cellViewModel?.expense.date)!)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
+        cellViewModel.deleteThisExpense()
         dismiss(animated: true)
     }
     
@@ -63,6 +59,4 @@ class ShowInfoViewController: UIViewController{
         dismiss(animated: true)
     }
     
-    
-
 }

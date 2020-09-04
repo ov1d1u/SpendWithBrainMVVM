@@ -39,7 +39,7 @@ class Utils{
         // Here using getDirectoryPath method to get the Directory path
         let imagePath = (getDirectoryPath() as NSString).appendingPathComponent(imageName)
         if fileManager.fileExists(atPath: imagePath){
-            return UIImage(contentsOfFile: imagePath)!
+            return UIImage(contentsOfFile: imagePath) ?? #imageLiteral(resourceName: "chitanta.png")
         }else{
             print("No Image available")
             return #imageLiteral(resourceName: "chitanta.png") // Return placeholder image here

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		7DBBCB2724F1AFEC008C3A2D /* CurrencyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBCB2624F1AFEC008C3A2D /* CurrencyModels.swift */; };
+		9414E21325010A0E0093E3A8 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9414E21225010A0E0093E3A8 /* LoginViewModel.swift */; };
+		9414E21625010FCF0093E3A8 /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9414E21525010FCF0093E3A8 /* RegisterViewModel.swift */; };
+		9414E2192501142E0093E3A8 /* ResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9414E2182501142E0093E3A8 /* ResetViewModel.swift */; };
 		94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94237A0B24EFE64C00E86D32 /* MainScreenViewController.swift */; };
 		94237A0E24EFEB2500E86D32 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94237A0D24EFEB2500E86D32 /* Navigation.swift */; };
 		94237A1124EFF9D000E86D32 /* AddExpenseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94237A1024EFF9D000E86D32 /* AddExpenseViewController.swift */; };
@@ -15,6 +18,7 @@
 		9425B21624F4EB23004DB666 /* AlertServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9425B21524F4EB23004DB666 /* AlertServices.swift */; };
 		94382EFF24EC0E1D00DECE94 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 94382EFE24EC0E1D00DECE94 /* Default-568h@2x.png */; };
 		94382F0124EC149400DECE94 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94382F0024EC149400DECE94 /* Colors.xcassets */; };
+		946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946D52AA25011DBA008A3C5F /* ConverterViewModel.swift */; };
 		946F9E6324F8DCB500DD26B4 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 946F9E6224F8DCB500DD26B4 /* Utils.swift */; };
 		947ACF7024F79BC400FEB842 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ACF6F24F79BC400FEB842 /* EditViewController.swift */; };
 		947ACF7424F79E0500FEB842 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947ACF7324F79E0500FEB842 /* Edit.storyboard */; };
@@ -55,6 +59,9 @@
 		73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpendWithBrain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DBBCB2624F1AFEC008C3A2D /* CurrencyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModels.swift; sourceTree = "<group>"; };
 		82D8E4D8A136C659186190BF /* Pods-SpendWithBrain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpendWithBrain.release.xcconfig"; path = "Target Support Files/Pods-SpendWithBrain/Pods-SpendWithBrain.release.xcconfig"; sourceTree = "<group>"; };
+		9414E21225010A0E0093E3A8 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		9414E21525010FCF0093E3A8 /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		9414E2182501142E0093E3A8 /* ResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewModel.swift; sourceTree = "<group>"; };
 		94237A0B24EFE64C00E86D32 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
 		94237A0D24EFEB2500E86D32 /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		94237A1024EFF9D000E86D32 /* AddExpenseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddExpenseViewController.swift; sourceTree = "<group>"; };
@@ -62,6 +69,7 @@
 		9425B21524F4EB23004DB666 /* AlertServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertServices.swift; sourceTree = "<group>"; };
 		94382EFE24EC0E1D00DECE94 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		94382F0024EC149400DECE94 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		946D52AA25011DBA008A3C5F /* ConverterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewModel.swift; sourceTree = "<group>"; };
 		946F9E6224F8DCB500DD26B4 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		947ACF6F24F79BC400FEB842 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		947ACF7324F79E0500FEB842 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
@@ -119,6 +127,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		9414E211250109FD0093E3A8 /* LoginViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9414E21225010A0E0093E3A8 /* LoginViewModel.swift */,
+			);
+			path = LoginViewModel;
+			sourceTree = "<group>";
+		};
+		9414E21425010FC30093E3A8 /* RegisterViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9414E21525010FCF0093E3A8 /* RegisterViewModel.swift */,
+			);
+			path = RegisterViewModel;
+			sourceTree = "<group>";
+		};
+		9414E217250114220093E3A8 /* ResetViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9414E2182501142E0093E3A8 /* ResetViewModel.swift */,
+			);
+			path = ResetViewModel;
+			sourceTree = "<group>";
+		};
 		94237A0F24EFF9B500E86D32 /* addExpense */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +159,14 @@
 				9425B21524F4EB23004DB666 /* AlertServices.swift */,
 			);
 			path = addExpense;
+			sourceTree = "<group>";
+		};
+		946D52A925011D9F008A3C5F /* ConverterViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				946D52AA25011DBA008A3C5F /* ConverterViewModel.swift */,
+			);
+			path = ConverterViewModel;
 			sourceTree = "<group>";
 		};
 		947ACF6D24F79B9800FEB842 /* showInfo */ = {
@@ -239,6 +279,7 @@
 		94C35A7E24ED3ED30032443F /* login */ = {
 			isa = PBXGroup;
 			children = (
+				9414E211250109FD0093E3A8 /* LoginViewModel */,
 				94E1835D24EBFEB9002D3E2A /* LoginViewController.swift */,
 				94E1835F24EBFEB9002D3E2A /* Login.storyboard */,
 			);
@@ -248,6 +289,7 @@
 		94C35A7F24ED460A0032443F /* register */ = {
 			isa = PBXGroup;
 			children = (
+				9414E21425010FC30093E3A8 /* RegisterViewModel */,
 				94C35A8024ED46220032443F /* RegisterViewController.swift */,
 				94C35A8224ED46480032443F /* Register.storyboard */,
 			);
@@ -257,6 +299,7 @@
 		94C35A8424ED4B840032443F /* resetPassword */ = {
 			isa = PBXGroup;
 			children = (
+				9414E217250114220093E3A8 /* ResetViewModel */,
 				94C35A8924ED4C0A0032443F /* ResetViewController.swift */,
 				94C35A8524ED4B9E0032443F /* Reset.storyboard */,
 			);
@@ -307,6 +350,7 @@
 		94F613D424EFA730006AA093 /* converter */ = {
 			isa = PBXGroup;
 			children = (
+				946D52A925011D9F008A3C5F /* ConverterViewModel */,
 				94F613D524EFA743006AA093 /* ConverterViewController.swift */,
 				94F613DB24EFA785006AA093 /* Converter.storyboard */,
 			);
@@ -450,12 +494,14 @@
 				94C2A6DF24ED649D009D644F /* Expense.swift in Sources */,
 				7DBBCB2724F1AFEC008C3A2D /* CurrencyModels.swift in Sources */,
 				94D80FD224F664F1006F40FC /* ShowInfo.swift in Sources */,
+				9414E2192501142E0093E3A8 /* ResetViewModel.swift in Sources */,
 				9491DA3624FF7329006697AF /* HomeViewModel.swift in Sources */,
 				94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */,
 				94ACC94C24EEBA46002B9E5B /* MenuViewController.swift in Sources */,
 				94C35A8124ED46220032443F /* RegisterViewController.swift in Sources */,
 				94D80FCA24F6451E006F40FC /* CustomTableViewCell.swift in Sources */,
 				94E1835E24EBFEB9002D3E2A /* LoginViewController.swift in Sources */,
+				946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */,
 				94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */,
 				94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */,
 				9491DA3924FFCC40006697AF /* ExpenseViewModel.swift in Sources */,
@@ -466,11 +512,13 @@
 				947ACF7A24F7E86200FEB842 /* setAmountFromConverter.swift in Sources */,
 				94237A1124EFF9D000E86D32 /* AddExpenseViewController.swift in Sources */,
 				94ACC94724EE96EA002B9E5B /* HomeViewController.swift in Sources */,
+				9414E21325010A0E0093E3A8 /* LoginViewModel.swift in Sources */,
 				94237A0E24EFEB2500E86D32 /* Navigation.swift in Sources */,
 				94E1835C24EBFEB9002D3E2A /* AppDelegate.swift in Sources */,
 				94ACC94424EE4EA9002B9E5B /* LocalDataBase.swift in Sources */,
 				94C2A6E224ED6CC9009D644F /* Validations.swift in Sources */,
 				947ACF7024F79BC400FEB842 /* EditViewController.swift in Sources */,
+				9414E21625010FCF0093E3A8 /* RegisterViewModel.swift in Sources */,
 				94F613D624EFA743006AA093 /* ConverterViewController.swift in Sources */,
 				946F9E6324F8DCB500DD26B4 /* Utils.swift in Sources */,
 			);

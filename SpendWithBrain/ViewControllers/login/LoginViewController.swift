@@ -13,6 +13,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var emailField: HoshiTextField!
     @IBOutlet weak var passField: HoshiTextField!
+    
+    var loginViewModel : LoginViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViewsInLoginScreen()
@@ -48,22 +50,12 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func loginBtn(_ sender: UIButton) {
-        let email = emailField.text!
-        let pass = passField.text!
-        if(Validations.emailValid(email: email)){
-            if let passInBD = LocalDataBase.getPasswordForLoginCheck(for: email){
-                if(passInBD==pass){
-                    LocalDataBase.saveUserToken(for: email)
-                    redirectToHome()
-                    
-                }else{
-                    AlertService.showAlert(style: .alert, title: "Error", message: "Please enter correct password for this email.")
-                }
-            }else{
-                AlertService.showAlert(style: .alert, title: "Error", message: "You get wrong email or user with this email not exist.")
-            }
+        loginViewModel = LoginViewModel(email : emailField.text!,password: passField.text!)
+        let errorMessage = loginViewModel!.isInputsValid()
+        if errorMessage.count > 0 {
+            AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
         }else{
-            AlertService.showAlert(style: .alert, title: "Error", message: "Please enter correct email format.")
+            redirectToHome()
         }
     }
     

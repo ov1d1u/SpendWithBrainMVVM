@@ -11,12 +11,20 @@ import UIKit
 struct Expense : Codable,CustomStringConvertible{
     var date : Date
     var amount : Float
-    var category : CategoryEnum
+    var category : CategoryEnum?
     var details : String
     var image : String
     
     var description: String{
-        return "\(date)..\(amount)..\(category)..\(details)..\(image)"
+        return "\(date)..\(amount)..\(String(describing: category))..\(details)..\(image)"
+    }
+    
+    init(){
+        date = Date()
+        amount = 0.0
+        category = nil
+        details = ""
+        image = ""
     }
 }
 

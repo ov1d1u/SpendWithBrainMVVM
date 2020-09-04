@@ -18,21 +18,14 @@ class HomeViewController: UIViewController{
     @IBOutlet weak var weekExp: UILabel!
     @IBOutlet weak var monthExp: UILabel!
     @IBOutlet weak var chartDetails: BarChartView!
-    var bugdetViewModel  : HomeViewModel! {
-        didSet{
-            currentBalanceLbl.text = bugdetViewModel.currentBalance
-            todayExp.text = bugdetViewModel.todayExpense
-            weekExp.text = bugdetViewModel.weekExpense
-            monthExp.text = bugdetViewModel.monthExpense
-            chartDetails.data = bugdetViewModel.dataSetChart
-            chartDetails.xAxis.valueFormatter = IndexAxisValueFormatter(values: bugdetViewModel.xValueChart)
-        }
-    }
+    var bugdetViewModel  : HomeViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshUserData"), object: nil)
         customize()
-        bugdetViewModel = HomeViewModel(user: LocalDataBase.getUserInfo()!)
+        bugdetViewModel = HomeViewModel()
+        bugdetViewModel.initializeViewModelNotifi()
+        bugdetViewModel.delegate = self
+        bugdetViewModel.initializeUser(user: LocalDataBase.getUserInfo()!)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -43,9 +36,7 @@ class HomeViewController: UIViewController{
         }
     }
     
-    @objc func refreshUserData(_ notification: Notification){
-        bugdetViewModel = HomeViewModel(user: LocalDataBase.getUserInfo()!)
-    }
+    
     
     private func customize(){
         //customize design
@@ -60,6 +51,18 @@ class HomeViewController: UIViewController{
         chartDetails.rightAxis.drawGridLinesEnabled = false
         //center legeng
         chartDetails.legend.horizontalAlignment = .center
+    }
+}
+
+extension HomeViewController : HomeViewModelDelegate {
+    func refreshUI() {
+        guard let vm = bugdetViewModel ,let model = vm.model else {return}
+        currentBalanceLbl.text = model.currentBalance
+        todayExp.text = model.todayExpense
+        weekExp.text = model.weekExpense
+        monthExp.text = model.monthExpense
+        chartDetails.data = model.dataSetChart
+        chartDetails.xAxis.valueFormatter = IndexAxisValueFormatter(values: model.xValueChart)
     }
 }
 

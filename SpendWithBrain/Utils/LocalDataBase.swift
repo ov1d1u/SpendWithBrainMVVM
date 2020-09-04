@@ -36,6 +36,16 @@ class LocalDataBase{
             return true
         }
     }
+    
+    static func isEmailAlreadyExist(for email:String)->Bool{
+        let userDefaultsKeys = defaults.dictionaryRepresentation().keys
+        for thisKey in userDefaultsKeys{
+            if thisKey == email {
+                return true
+            }
+        }
+        return false
+    }
     static func getPasswordForLoginCheck(for email:String) -> String?{
         if let userJson = defaults.string(forKey: email){
             let user = decodeUser(userJson)
