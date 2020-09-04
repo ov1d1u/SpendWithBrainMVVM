@@ -16,19 +16,17 @@ class ExpensesViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
 
     private var infoView : ShowInfoViewController?
-    private var expenseViewModel : ExpenseViewModel! {
-        didSet{
-            amountLabel.text = expenseViewModel.totalExpense
-            chart.data = expenseViewModel.pieDataSet
-        }
-    }
+    private var expenseViewModel : ExpenseViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.dataSource = self
         table.delegate = self
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
-        fillWithStartData(7)
+        expenseViewModel = ExpenseViewModel()
+        expenseViewModel.delegate = self
+        expenseViewModel.initUserAndPeriod(user: LocalDataBase.getUserInfo()!, forPeriod: 7)
+        expenseViewModel.initNotificationObserver()
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,36 +35,21 @@ class ExpensesViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "My Expenses"
     }
     
-    @objc func refreshUserData(_ notification: Notification){
-        switch segmentControll.selectedSegmentIndex {
-        case 0: print("Selected week info")
-        fillWithStartData(7)
-        case 1: print("Selected month info")
-        fillWithStartData(30)
-        case 2: print("Selected year info")
-        fillWithStartData(365)
-        default:
-            break
-        }
-    }
+    
     
     @IBAction func segmentChange(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: print("Selected week info")
-        fillWithStartData(7)
+        expenseViewModel.setModel(forPeriod: 7)
         case 1: print("Selected month info")
-        fillWithStartData(30)
+        expenseViewModel.setModel(forPeriod: 30)
         case 2: print("Selected year info")
-        fillWithStartData(365)
+        expenseViewModel.setModel(forPeriod: 365)
         default:
             break
         }
     }
     
-    private func fillWithStartData(_ days : Int){
-        expenseViewModel = ExpenseViewModel(user: LocalDataBase.getUserInfo()!, period: days)
-        table.reloadData()
-    }
     
     
     
@@ -74,12 +57,6 @@ class ExpensesViewController: UIViewController {
         segmentControll.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.white], for: .selected)
         segmentControll.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.black], for: .normal)
         chart.legend.enabled = false
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 1
-        formatter.multiplier = 1.0
-        chart.data?.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        chart.data?.setValueTextColor(#colorLiteral(red: 0, green: 0, blue: 0, alpha: 1))
         let pieChartAttribute = [ NSAttributedString.Key.font: UIFont(name: "Arial", size: 16.0)!, NSAttributedString.Key.foregroundColor: UIColor.init(displayP3Red: 0.462, green: 0.838, blue: 1.000, alpha: 1) ]
         let pieChartAttrString = NSAttributedString(string: "Quarterly Revenue", attributes: pieChartAttribute)
         chart.centerAttributedText = pieChartAttrString
@@ -89,18 +66,19 @@ class ExpensesViewController: UIViewController {
         let showDialog = ShowInfo()
         let showVC = showDialog.alert()
         let cell = sender.view as! CustomTableViewCell
-        showVC.setData(cell.cellViewModel)
+        showVC.expense = cell.expense
         present(showVC, animated: true)
     }
 }
 extension ExpensesViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return expenseViewModel.expenses.count
+        return expenseViewModel.model!.expenses.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "custom") as! CustomTableViewCell
-        cell.cellViewModel = CellViewModel(expense: expenseViewModel.expenses[indexPath.row],soldAfterThis : expenseViewModel.getSoldForThisExpense(at: indexPath.row))
+        cell.expense = expenseViewModel.model!.expenses[indexPath.row]
+        cell.setUI(expenseViewModel.getSoldForThisExpense(at: indexPath.row))
         let tapGest = UITapGestureRecognizer(target: self, action: #selector(selectOneExpense(_:)))
         cell.addGestureRecognizer(tapGest)
         return cell
@@ -110,4 +88,13 @@ extension ExpensesViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
+}
+
+extension ExpensesViewController : RefreshViewModelDelegate{
+    func refreshUI() {
+        amountLabel.text = expenseViewModel.model?.totalExpense
+        chart.data = expenseViewModel.model?.pieDataSet
+        table.reloadData()
+    }
+    
 }

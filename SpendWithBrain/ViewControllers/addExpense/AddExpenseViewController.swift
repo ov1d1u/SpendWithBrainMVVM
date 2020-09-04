@@ -14,20 +14,16 @@ class AddExpenseViewController: UIViewController{
     @IBOutlet weak var dataPicker: UIDatePicker!
     @IBOutlet weak var amountInput: HoshiTextField!
     @IBOutlet weak var detailsInput: UITextField!
-    private var currentCategory : CategoryEnum?
     @IBOutlet weak var imageView: UIImageView!
-    private var imagePath : String?
     
-    var cell : CellViewModel!{
-        didSet{
-            imageView.image = Utils.getImage(imageName: cell.expense.image)
-        }
-    }
+    private var currentCategory : CategoryEnum?
+    private var imagePath : String = ""
+    
+    var addViewModel = AddViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeScreen()
-        cell = CellViewModel()
     }
     
     
@@ -49,26 +45,13 @@ class AddExpenseViewController: UIViewController{
         }
     }
     
-    @IBAction func didSelectDate(_ sender: UIDatePicker) {
-        cell.expense.date = dataPicker.date
-    }
-    
-    @IBAction func amountDidChanged(_ sender: HoshiTextField) {
-        cell.expense.amount = Float(sender.text!)!
-    }
-    
-    @IBAction func detailsDidChanged(_ sender: UITextField) {
-        cell.expense.details = sender.text!
-    }
-    
-    
-    
     @IBAction func addImageClick(_ sender: UIButton) {
         showImagePickerControllerActionSheet()
     }
     
     @IBAction func removeImage(_ sender: UIButton) {
-        cell.expense.image = "Fara poza"
+        imagePath = "Fara poza"
+        imageView.image = #imageLiteral(resourceName: "chitanta")
     }
     
     @objc func selectOneCategory(_ sender:UITapGestureRecognizer){
@@ -77,8 +60,8 @@ class AddExpenseViewController: UIViewController{
             if item == thisView {
                 item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 if let label = item.subviews[1] as? UILabel{
-                    cell.expense.category = CategoryEnum(rawValue: label.text!)!
-                    print("AddExpense -> User selected \(String(describing: cell.expense.category)) for this expense")
+                    currentCategory = CategoryEnum(rawValue: label.text!)
+                    print("AddExpense -> User selected \(String(describing: currentCategory?.rawValue)) for this expense")
                 }
             }else{
                 item.layer.borderColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
@@ -87,12 +70,20 @@ class AddExpenseViewController: UIViewController{
     }
     
     @objc private func saveClick(){
-        let (errorTitle,errorMessage) = cell.isExpenseValid()
-        if errorMessage.count<1 {
-            cell.saveNewExpense()
+        var floatValueOfAmount : Float
+        if amountInput.text!.count > 0 {
+            floatValueOfAmount = Float(amountInput.text!)!
+        }else{
+            floatValueOfAmount = -1
+        }
+        let detailsText = detailsInput.text ?? ""
+        let expense = Expense(dataPicker.date, floatValueOfAmount, currentCategory, detailsText, imagePath)
+        let message = addViewModel.isExpenseValid(expense: expense)
+        if message.count<1 {
+            addViewModel.addExpense(expense: expense)
             _ = navigationController?.popViewController(animated: true)
         }else{
-            AlertService.showAlert(style: .alert, title: errorTitle, message: errorMessage)
+            AlertService.showAlert(style: .alert, title: "Error", message: message)
         }
     }
 }
@@ -120,12 +111,12 @@ extension AddExpenseViewController : UIImagePickerControllerDelegate , UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            cell.expense.image = Utils.saveImageToDocumentDirectory(image: editedImage)
+            imagePath = Utils.saveImageToDocumentDirectory(image: editedImage)
             
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            cell.expense.image = Utils.saveImageToDocumentDirectory(image: originalImage)
+            imagePath = Utils.saveImageToDocumentDirectory(image: originalImage)
         }
-        print("image for expense was added")
+        imageView.image = Utils.getImage(imageName: imagePath)
         dismiss(animated: true)
     }
 }

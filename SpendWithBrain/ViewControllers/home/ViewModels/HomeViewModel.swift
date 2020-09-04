@@ -9,7 +9,7 @@
 import Foundation
 import Charts
 
-protocol HomeViewModelDelegate {
+protocol RefreshViewModelDelegate {
     func refreshUI()
 }
 struct HomeModel{
@@ -24,7 +24,7 @@ class HomeViewModel {
     
     var user = User(password: "", name: "")
     var model : HomeModel?
-    var delegate : HomeViewModelDelegate?
+    var delegate : RefreshViewModelDelegate?
     
     
     

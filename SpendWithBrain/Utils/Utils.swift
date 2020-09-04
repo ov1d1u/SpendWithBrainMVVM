@@ -52,4 +52,9 @@ class Utils{
         return documentsDirectory
     }
     
+    static func updateMainScreens(){
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
+    }
+    
 }

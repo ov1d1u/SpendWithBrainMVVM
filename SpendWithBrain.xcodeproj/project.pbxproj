@@ -23,9 +23,11 @@
 		947ACF7024F79BC400FEB842 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ACF6F24F79BC400FEB842 /* EditViewController.swift */; };
 		947ACF7424F79E0500FEB842 /* Edit.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 947ACF7324F79E0500FEB842 /* Edit.storyboard */; };
 		947ACF7A24F7E86200FEB842 /* setAmountFromConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947ACF7924F7E86200FEB842 /* setAmountFromConverter.swift */; };
+		947C755B25026D0400F874E6 /* ShowInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947C755A25026D0400F874E6 /* ShowInfoViewModel.swift */; };
+		947C755D2502751C00F874E6 /* AddViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947C755C2502751C00F874E6 /* AddViewModel.swift */; };
+		947C755F25027D8F00F874E6 /* EditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 947C755E25027D8F00F874E6 /* EditViewModel.swift */; };
 		9491DA3624FF7329006697AF /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491DA3524FF7329006697AF /* HomeViewModel.swift */; };
 		9491DA3924FFCC40006697AF /* ExpenseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491DA3824FFCC40006697AF /* ExpenseViewModel.swift */; };
-		9491DA3B24FFD337006697AF /* CellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9491DA3A24FFD337006697AF /* CellViewModel.swift */; };
 		94ACC94424EE4EA9002B9E5B /* LocalDataBase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */; };
 		94ACC94724EE96EA002B9E5B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACC94624EE96EA002B9E5B /* HomeViewController.swift */; };
 		94ACC94C24EEBA46002B9E5B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACC94B24EEBA46002B9E5B /* MenuViewController.swift */; };
@@ -74,9 +76,11 @@
 		947ACF6F24F79BC400FEB842 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		947ACF7324F79E0500FEB842 /* Edit.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Edit.storyboard; sourceTree = "<group>"; };
 		947ACF7924F7E86200FEB842 /* setAmountFromConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = setAmountFromConverter.swift; sourceTree = "<group>"; };
+		947C755A25026D0400F874E6 /* ShowInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInfoViewModel.swift; sourceTree = "<group>"; };
+		947C755C2502751C00F874E6 /* AddViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddViewModel.swift; sourceTree = "<group>"; };
+		947C755E25027D8F00F874E6 /* EditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewModel.swift; sourceTree = "<group>"; };
 		9491DA3524FF7329006697AF /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		9491DA3824FFCC40006697AF /* ExpenseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseViewModel.swift; sourceTree = "<group>"; };
-		9491DA3A24FFD337006697AF /* CellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellViewModel.swift; sourceTree = "<group>"; };
 		94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDataBase.swift; sourceTree = "<group>"; };
 		94ACC94624EE96EA002B9E5B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		94ACC94B24EEBA46002B9E5B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				94237A1024EFF9D000E86D32 /* AddExpenseViewController.swift */,
 				94237A1224EFF9E100E86D32 /* AddExpense.storyboard */,
 				9425B21524F4EB23004DB666 /* AlertServices.swift */,
+				947C755C2502751C00F874E6 /* AddViewModel.swift */,
 			);
 			path = addExpense;
 			sourceTree = "<group>";
@@ -175,6 +180,7 @@
 				94D80FCB24F65722006F40FC /* ShowInfo.storyboard */,
 				94D80FCD24F657C9006F40FC /* ShowInfoViewController.swift */,
 				94D80FD124F664F1006F40FC /* ShowInfo.swift */,
+				947C755A25026D0400F874E6 /* ShowInfoViewModel.swift */,
 			);
 			path = showInfo;
 			sourceTree = "<group>";
@@ -185,32 +191,24 @@
 				947ACF6F24F79BC400FEB842 /* EditViewController.swift */,
 				947ACF7324F79E0500FEB842 /* Edit.storyboard */,
 				947ACF7924F7E86200FEB842 /* setAmountFromConverter.swift */,
+				947C755E25027D8F00F874E6 /* EditViewModel.swift */,
 			);
 			path = editExpense;
 			sourceTree = "<group>";
 		};
-		9491DA3424FF7316006697AF /* ViewModelHome */ = {
+		947C756025027E7200F874E6 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				9491DA3524FF7329006697AF /* HomeViewModel.swift */,
-			);
-			path = ViewModelHome;
-			sourceTree = "<group>";
-		};
-		9491DA3724FFCB5D006697AF /* ViewModelExpense */ = {
-			isa = PBXGroup;
-			children = (
 				9491DA3824FFCC40006697AF /* ExpenseViewModel.swift */,
-				9491DA3A24FFD337006697AF /* CellViewModel.swift */,
 			);
-			path = ViewModelExpense;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		94ACC94524EE96D5002B9E5B /* home */ = {
 			isa = PBXGroup;
 			children = (
-				9491DA3724FFCB5D006697AF /* ViewModelExpense */,
-				9491DA3424FF7316006697AF /* ViewModelHome */,
+				947C756025027E7200F874E6 /* ViewModels */,
 				94ACC94F24EEBD26002B9E5B /* Home.storyboard */,
 				94ACC94624EE96EA002B9E5B /* HomeViewController.swift */,
 				94F613DF24EFE150006AA093 /* ExpensesViewController.swift */,
@@ -490,9 +488,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9491DA3B24FFD337006697AF /* CellViewModel.swift in Sources */,
+				947C755D2502751C00F874E6 /* AddViewModel.swift in Sources */,
 				94C2A6DF24ED649D009D644F /* Expense.swift in Sources */,
 				7DBBCB2724F1AFEC008C3A2D /* CurrencyModels.swift in Sources */,
+				947C755F25027D8F00F874E6 /* EditViewModel.swift in Sources */,
 				94D80FD224F664F1006F40FC /* ShowInfo.swift in Sources */,
 				9414E2192501142E0093E3A8 /* ResetViewModel.swift in Sources */,
 				9491DA3624FF7329006697AF /* HomeViewModel.swift in Sources */,
@@ -501,6 +500,7 @@
 				94C35A8124ED46220032443F /* RegisterViewController.swift in Sources */,
 				94D80FCA24F6451E006F40FC /* CustomTableViewCell.swift in Sources */,
 				94E1835E24EBFEB9002D3E2A /* LoginViewController.swift in Sources */,
+				947C755B25026D0400F874E6 /* ShowInfoViewModel.swift in Sources */,
 				946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */,
 				94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */,
 				94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */,

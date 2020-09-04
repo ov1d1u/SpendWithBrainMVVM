@@ -9,17 +9,52 @@
 import Foundation
 import Charts
 
-struct ExpenseViewModel{
-    var totalExpense : String = ""
-    var pieDataSet : PieChartData = PieChartData()
+
+struct ExpenseDataModel{
+    var totalExpense : String
+    var pieDataSet : PieChartData
+    var period : Int
+    var expenses : [Expense]
+}
+class ExpenseViewModel{
     var user = User(password: "", name: "")
-    var expenses = [Expense]()
-    var period = 0
-    init(user : User,period : Int){
+    var model : ExpenseDataModel?
+    var delegate : RefreshViewModelDelegate?
+    
+    func initUserAndPeriod(user : User,forPeriod period : Int){
         self.user = user
-        totalExpense = String(getSoldForPeriod(getExpenses(for: period)).rounded(toPlaces: 2))
-        pieDataSet = getPieData()
-        expenses = getExpenses(for: period)
+        setModel(forPeriod: period)
+    }
+    
+    func initNotificationObserver(){
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
+    }
+    
+    func setModel(forPeriod period: Int){
+        model = ExpenseDataModel(totalExpense: String(getSoldForPeriod(getExpenses(for: period)).rounded(toPlaces: 2)),
+                                 pieDataSet: getPieData(),
+                                 period: period,
+                                 expenses : getExpenses(for: period))
+        delegate?.refreshUI()
+    }
+    
+    func updateUserInfo(){
+        user = LocalDataBase.getUserInfo()!
+    }
+    
+    
+    @objc func refreshUserData(_ notification: Notification){
+        updateUserInfo()
+        switch model?.period {
+        case 7: print("Selected week info")
+        setModel(forPeriod: 7)
+        case 30: print("Selected month info")
+        setModel(forPeriod: 30)
+        case 365: print("Selected year info")
+        setModel(forPeriod: 365)
+        default:
+            break
+        }
     }
     
     private func getSoldForPeriod(_ expenses : [Expense]) -> Float{
@@ -61,8 +96,13 @@ struct ExpenseViewModel{
         }
         
         let pieDataSet = PieChartDataSet(values: dataEntries, label: "")
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .percent
+        formatter.maximumFractionDigits = 1
+        formatter.multiplier = 1.0
+        pieDataSet.valueFormatter = formatter as? IValueFormatter
+        pieDataSet.valueTextColor = .black
         pieDataSet.colors = usedColors
-        //pieDataSet.valueFormatter = formatter as? IValueFormatter
         let pieChartData = PieChartData(dataSet: pieDataSet)
         return pieChartData
     }
@@ -99,10 +139,10 @@ struct ExpenseViewModel{
             return currSold
         }
         for i in 0..<index{
-            if expenses[i].category == CategoryEnum.Income{
-                currSold-=expenses[i].amount
+            if model!.expenses[i].category == CategoryEnum.Income{
+                currSold-=model!.expenses[i].amount
             }else{
-                currSold+=expenses[i].amount
+                currSold+=model!.expenses[i].amount
             }
         }
         return currSold

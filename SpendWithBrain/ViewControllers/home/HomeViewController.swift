@@ -54,7 +54,7 @@ class HomeViewController: UIViewController{
     }
 }
 
-extension HomeViewController : HomeViewModelDelegate {
+extension HomeViewController : RefreshViewModelDelegate {
     func refreshUI() {
         guard let vm = bugdetViewModel ,let model = vm.model else {return}
         currentBalanceLbl.text = model.currentBalance

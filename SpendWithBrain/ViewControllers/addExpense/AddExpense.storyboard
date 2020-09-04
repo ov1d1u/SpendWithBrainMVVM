@@ -42,9 +42,6 @@
                                                 <date key="maximumDate" timeIntervalSinceReferenceDate="1167562800">
                                                     <!--2037-12-31 11:00:00 +0000-->
                                                 </date>
-                                                <connections>
-                                                    <action selector="didSelectDate:" destination="ybH-ll-Rmo" eventType="valueChanged" id="M2E-9I-Vfz"/>
-                                                </connections>
                                             </datePicker>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hy-fa-oPO">
                                                 <rect key="frame" x="8" y="151.5" width="57" height="19.5"/>
@@ -62,9 +59,6 @@
                                                         <real key="value" value="0.0"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <connections>
-                                                    <action selector="amountDidChanged:" destination="ybH-ll-Rmo" eventType="editingDidEnd" id="QlC-HD-3Ac"/>
-                                                </connections>
                                             </textField>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MRm-Vm-F3u">
                                                 <rect key="frame" x="8" y="245" width="67" height="19.5"/>
@@ -274,9 +268,6 @@
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="yes"/>
-                                                <connections>
-                                                    <action selector="detailsDidChanged:" destination="ybH-ll-Rmo" eventType="editingDidEnd" id="IL0-vo-Bp1"/>
-                                                </connections>
                                             </textField>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XHK-xd-uoR" userLabel="moreInfoUnderLine">
                                                 <rect key="frame" x="8" y="566" width="300" height="2"/>

@@ -10,44 +10,46 @@ import UIKit
 import TextFieldEffects
 
 class EditViewController: UIViewController , setAmountFromConverter {
-    var cellRecieve : CellViewModel?
-    var cell : CellViewModel!{
-        didSet{
-            dataPicker.date = (cell?.expense.date)!
-            amount.text = String(cell!.expense.amount)
-            currentCategory = cell.expense.category
-            selectCurrentCategory()
-            detailsInput.text = cell?.expense.details
-            imageView.image = Utils.getImage(imageName: (cell.expense.image))
-        }
-    }
+    var expenseRecieve : Expense?
+    var oldDate : Date?
     
     @IBOutlet weak var amount: HoshiTextField!
     @IBOutlet var categoryViewArray: [UIView]!
     @IBOutlet weak var dataPicker: UIDatePicker!
     @IBOutlet weak var detailsInput: UITextField!
-    private var currentCategory : CategoryEnum?
     @IBOutlet weak var imageView: UIImageView!
+    
+    private var currentCategory : CategoryEnum?
+    var editViewModel = EditViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        cell = cellRecieve!
     }
     
+    
     func setAmount(_ amountFromConverter: String) {
-        cell.expense.amount = Float(amountFromConverter)!
+        expenseRecieve!.amount = Float(amountFromConverter)!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        oldDate = expenseRecieve?.date
         customizeScreen()
     }
+    
     private func customizeScreen(){
         self.title = "Edit action"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",style: .plain,target: self,action: #selector(saveClick))
         dataPicker.maximumDate = Date()
         setupCategoriesViews()
+        dataPicker.date = expenseRecieve!.date
+        amount.text = String(expenseRecieve!.amount)
+        currentCategory = expenseRecieve!.category
+        selectCurrentCategory()
+        detailsInput.text = expenseRecieve!.details
+        imageView.image = Utils.getImage(imageName: expenseRecieve!.image)
     }
+    
     private func setupCategoriesViews(){
         for item in categoryViewArray {
             item.layer.cornerRadius = 4
@@ -70,42 +72,31 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     @IBAction func savePhotoClick(_ sender: UIButton) {
-        print("cu salvarea locala nu am nevoie de tine, thx")
+        print("utilizand date locale nu am nevoie de tine, thx")
     }
     
     @IBAction func deleteSelectedPhotoClick(_ sender: UIButton) {
-        cell.expense.image = "Fara poza"
+       expenseRecieve!.image = "Fara poza"
+       imageView.image = #imageLiteral(resourceName: "chitanta")
     }
     
     func selectCurrentCategory(){
         for item in categoryViewArray{
             if let textLabel = item.subviews[1] as? UILabel{
-                if textLabel.text! == cell.expense.category!.rawValue {
+                if textLabel.text! == expenseRecieve!.category!.rawValue {
                     item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 }
             }
         }
     }
-    @IBAction func amountChange(_ sender: HoshiTextField) {
-        if((sender.text?.count)!>0){
-            cell.expense.amount = Float(sender.text!)!
-        }
-    }
     
-    @IBAction func dateChanged(_ sender: UIDatePicker) {
-        cell.expense.date = dataPicker.date
-    }
-    
-    @IBAction func detailsChanged(_ sender: UITextField) {
-        cell.expense.details = sender.text!
-    }
     @objc func selectOneCategory(_ sender:UITapGestureRecognizer){
         let thisView = sender.view
         for item in categoryViewArray{
             if item == thisView {
                 item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 if let label = item.subviews[1] as? UILabel{
-                    cell.expense.category = CategoryEnum(rawValue: label.text!)!
+                    expenseRecieve!.category = CategoryEnum(rawValue: label.text!)!
                     print("AddExpense -> User selected \(currentCategory!) for this expense")
                 }
             }else{
@@ -115,12 +106,20 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     @objc private func saveClick(){
-        let (errorTitle,errorMessage) = cell.isExpenseValid()
+        if amount.text!.count > 0 {
+            expenseRecieve?.amount = Float(amount.text!)!
+        }else{
+            expenseRecieve?.amount = -1
+        }
+        expenseRecieve?.details = detailsInput.text ?? ""
+        expenseRecieve?.date = dataPicker.date
+        
+        let errorMessage = editViewModel.isExpenseValid(expense: expenseRecieve!)
         if errorMessage.count<1 {
-            cell.saveEditedExpense((cellRecieve?.expense.date)!)
+            editViewModel.saveEditExpense(expenseRecieve!, oldDate!)
             _ = navigationController?.popViewController(animated: true)
         }else{
-            AlertService.showAlert(style: .alert, title: errorTitle, message: errorMessage)
+            AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
         }
     }
     
@@ -148,10 +147,11 @@ extension EditViewController : UIImagePickerControllerDelegate , UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            cell.expense.image = Utils.saveImageToDocumentDirectory(image : editedImage)
+            expenseRecieve!.image = Utils.saveImageToDocumentDirectory(image : editedImage)
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            cell.expense.image = Utils.saveImageToDocumentDirectory(image : originalImage)
+            expenseRecieve!.image = Utils.saveImageToDocumentDirectory(image : originalImage)
         }
+        imageView.image = Utils.getImage(imageName: expenseRecieve!.image)
         dismiss(animated: true)
     }
 }

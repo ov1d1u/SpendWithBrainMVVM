@@ -32,9 +32,9 @@ class Navigation: UITabBarController {
     }
     
     @objc func goToEdit(_ notification: Notification) {
-        if let recievedCell = notification.userInfo!["cell"] as? CellViewModel{
+        if let exp = notification.userInfo!["expense"] as? Expense{
             let vc = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "edit") as! EditViewController
-            vc.cellRecieve = recievedCell
+            vc.expenseRecieve = exp
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

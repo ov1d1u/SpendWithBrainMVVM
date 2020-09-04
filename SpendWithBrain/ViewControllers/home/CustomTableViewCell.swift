@@ -16,24 +16,8 @@ class CustomTableViewCell: UITableViewCell {
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var imgCat: UIImageView!
     @IBOutlet weak var containerView: UIView!
-    var cellViewModel : CellViewModel! {
-        didSet{
-            dateOfExp.text = cellViewModel.day
-            amount.text = cellViewModel.amount
-            if Double(cellViewModel.amount)! < 0.0 {
-                amount.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
-            }else{
-                amount.textColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
-            }
-            incExp.text = cellViewModel.type
-            category.text = cellViewModel.category
-            imgCat.image = cellViewModel.imageCategory
-            soldAfterExp.text = cellViewModel.soldAfter
-            if Double(cellViewModel.soldAfter)! < 0.0 {
-                soldAfterExp.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
-            }
-        }
-    }
+    var expense : Expense?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
                 containerView.layer.cornerRadius = 4
@@ -44,6 +28,35 @@ class CustomTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    func setUI(_ soldAfter : Float){
+        dateOfExp.text = getDayString(date: (expense?.date)!)
+        category.text = expense!.category!.rawValue
+        imgCat.image = CategoryEnum.getCategoryImage(for: expense!.category!)
+        incExp.text = expense!.category == .Income ? "Income" : "Expense"
+        amount.text = expense!.category == .Income ? "+\(expense!.amount)" : "-\(expense!.amount)"
+        if expense!.amount < 0.0 {
+            amount.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+        }else{
+            amount.textColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
+        }
+        soldAfterExp.text = String(soldAfter.rounded(toPlaces: 2))
+        if soldAfter < 0.0 {
+            soldAfterExp.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+        }
+    }
+    
+    private func getDayString(date : Date) -> String{
+        if Calendar.current.isDateInToday(date){
+            return "Today"
+        }else if Calendar.current.isDateInYesterday(date){
+            return "Yesterday"
+        }else {
+            let dateFormat = DateFormatter()
+            dateFormat.dateFormat = "E d MMM"
+            return  String(dateFormat.string(from: date))
+        }
     }
     
 }
