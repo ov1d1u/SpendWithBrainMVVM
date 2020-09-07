@@ -14,7 +14,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
-    var registerViewModel : RegisterViewModel?
+    var registerViewModel = RegisterViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,8 +40,7 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func registerUser(_ sender: UIButton) {
-        registerViewModel = RegisterViewModel(name: nameField.text!,email: emailField.text!,password : passField.text!)
-        let (errorTitle,errorMessage) = (registerViewModel?.isInputsValid())!
+        let (errorTitle,errorMessage) = registerViewModel.isInputsValid(email: emailField.text, password: passField.text, name: nameField.text)
         if errorMessage.count > 0 {
             AlertService.showAlert(style: .alert, title: errorTitle, message: errorMessage)
         }else{

@@ -10,7 +10,7 @@ import Foundation
 
 class EditViewModel {
     
-    func isExpenseValid(expense : Expense) -> String {
+    func isExpenseValid(id : Date,expense : Expense) -> String {
         var errorMesage = ""
         if expense.category == nil {
             errorMesage.append("Select one category.\n")
@@ -21,16 +21,11 @@ class EditViewModel {
         if expense.details.count == 0 {
             errorMesage.append("Please, get some details about this expense.\n")
         }
-        return errorMesage
-    }
-    
-    func saveEditExpense(_ expense : Expense,_ id : Date){
-        LocalDataBase.deleteExpense(id)
-        var userInfo = LocalDataBase.getUserInfo()!
-        userInfo.expenses.append(expense)
-        if LocalDataBase.updateUserInfo(for: userInfo){
+        if errorMesage == ""{
+            ExpenseEntity.shared.updateExpense(id: id, expense: expense)
             Utils.updateMainScreens()
         }
+        return errorMesage
     }
     
     

@@ -19,7 +19,7 @@ class MenuViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        userName.text = "Hello "+LocalDataBase.getUserInfo()!.name
+        userName.text = "Hello "+UsersEntity.shared.getName()
         converterBtn.layer.borderWidth = 1
         converterBtn.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         mainBtn.layer.borderWidth = 1

@@ -80,7 +80,6 @@ class AddExpenseViewController: UIViewController{
         let expense = Expense(dataPicker.date, floatValueOfAmount, currentCategory, detailsText, imagePath)
         let message = addViewModel.isExpenseValid(expense: expense)
         if message.count<1 {
-            addViewModel.addExpense(expense: expense)
             _ = navigationController?.popViewController(animated: true)
         }else{
             AlertService.showAlert(style: .alert, title: "Error", message: message)

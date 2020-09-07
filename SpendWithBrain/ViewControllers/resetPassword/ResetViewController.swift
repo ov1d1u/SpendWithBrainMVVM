@@ -12,7 +12,7 @@ class ResetViewController: UIViewController {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetBtn: UIButton!
-    var resetViewModel : ResetViewModel?
+    var resetViewModel = ResetViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +23,7 @@ class ResetViewController: UIViewController {
         resetBtn.layer.cornerRadius = 4
     }
     @IBAction func resetBtnClick(_ sender: UIButton) {
-        resetViewModel = ResetViewModel(email :emailField.text!)
-        let (title,message) = (resetViewModel?.isInputsValid())!
+        let (title,message) = resetViewModel.isInputsValid(email: emailField.text)
         AlertService.showAlert(style: .alert, title: title, message: message)
     }
     

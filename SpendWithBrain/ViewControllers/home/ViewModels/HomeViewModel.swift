@@ -22,48 +22,46 @@ struct HomeModel{
 }
 class HomeViewModel {
     
-    var user = User(password: "", name: "")
+    var expenses = [Expense]()
     var model : HomeModel?
     var delegate : RefreshViewModelDelegate?
-    
-    
     
     
     func initializeViewModelNotifi(){
         NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshUserData"), object: nil)
     }
     
-    func initializeUser(user : User){
-        self.user = user
+    func initializeUser(){
+        self.expenses = ExpenseEntity.shared.getAllExpense()
         setModel()
         delegate?.refreshUI()
     }
     
     @objc func refreshUserData(_ notification: Notification){
+        self.expenses = ExpenseEntity.shared.getAllExpense()
         setModel()
         delegate?.refreshUI()
     }
     
     func setModel(){
-        model = HomeModel(currentBalance:String(user.sold.rounded(toPlaces: 2)),
-                          todayExpense: String(self.getExpenses(for: 0,with: user).rounded(toPlaces: 2)),
-                          weekExpense: String(self.getExpenses(for: 7,with: user).rounded(toPlaces: 2)),
-                          monthExpense: String(self.getExpenses(for: 30,with: user).rounded(toPlaces: 2)),
-                          dataSetChart: self.getDataSetChart(with: user),
+        model = HomeModel(currentBalance:String(expenses.sold.rounded(toPlaces: 2)),
+                          todayExpense: String(self.getExpenses(for: 0,with: expenses).rounded(toPlaces: 2)),
+                          weekExpense: String(self.getExpenses(for: 7,with: expenses).rounded(toPlaces: 2)),
+                          monthExpense: String(self.getExpenses(for: 30,with: expenses).rounded(toPlaces: 2)),
+                          dataSetChart: self.getDataSetChart(with: expenses),
                           xValueChart: self.getArrayMonth())
     }
     
     func isNewUser() -> Bool{
-        return user.expenses.count == 0
+        return expenses.count == 0
     }
     
-    private func getExpenses(for days: Int,with userDetails: User)-> Float{
-        let userExpenses = userDetails.expenses
+    private func getExpenses(for days: Int,with userDetails: [Expense])-> Float{
         var amountExp : Float = 0.0
         let calendar = Calendar.current
         let today = Date()
         if days == 0 {
-            for exp in userExpenses{
+            for exp in userDetails{
                 if calendar.isDateInToday(exp.date){
                     if exp.category == CategoryEnum.Income{
                         amountExp += exp.amount
@@ -74,7 +72,7 @@ class HomeViewModel {
             }
             return amountExp
         }
-        for exp in userExpenses{
+        for exp in userDetails{
             if exp.date >= calendar.date(byAdding: Calendar.Component.day, value: -days, to: today)!{
                 print(calendar.date(byAdding: Calendar.Component.day, value: -days, to: today)!)
                 if exp.category == CategoryEnum.Income{
@@ -87,7 +85,7 @@ class HomeViewModel {
         return amountExp
     }
     
-    private func getDataSetChart(with userDetails: User) -> BarChartData{
+    private func getDataSetChart(with userDetails: [Expense]) -> BarChartData{
             var arrayOfEntryPositive = [BarChartDataEntry]()
             var arrayOfEntryNegative = [BarChartDataEntry]()
             let currentSpends = getNormalizeArrayOfSpend(with: userDetails)
@@ -120,17 +118,17 @@ class HomeViewModel {
         return currArray
     }
     
-    private func getNormalizeArrayOfSpend(with userDetails: User) -> [Double]{
+    private func getNormalizeArrayOfSpend(with userDetails: [Expense]) -> [Double]{
         var monthSpends = [Double](repeating: 0, count: 12)
         
         let today = Date()
-        for index in userDetails.expenses.indices{
-            if userDetails.expenses[index].date >= Calendar.current.date(byAdding: Calendar.Component.day, value: -365, to: today)!{
-                let monthComp = Calendar.current.component(.month, from: userDetails.expenses[index].date)
-                if userDetails.expenses[index].category == CategoryEnum.Income{
-                    monthSpends[monthComp-1] += Double(userDetails.expenses[index].amount)
+        for index in userDetails.indices{
+            if userDetails[index].date >= Calendar.current.date(byAdding: Calendar.Component.day, value: -365, to: today)!{
+                let monthComp = Calendar.current.component(.month, from: userDetails[index].date)
+                if userDetails[index].category == CategoryEnum.Income{
+                    monthSpends[monthComp-1] += Double(userDetails[index].amount)
                 }else{
-                    monthSpends[monthComp-1] -= Double(userDetails.expenses[index].amount)
+                    monthSpends[monthComp-1] -= Double(userDetails[index].amount)
                 }
             }
         }
@@ -152,5 +150,19 @@ extension Float {
     func rounded(toPlaces places:Int) -> Float {
         let divisor = pow(10.0, Float(places))
         return (self * divisor).rounded() / divisor
+    }
+}
+
+extension Array where Element == Expense{
+    var sold : Float {
+        var calcSold : Float = 0
+        for index in self.indices{
+            if self[index].category == CategoryEnum.Income{
+                calcSold += self[index].amount
+            }else{
+                calcSold -= self[index].amount
+            }
+        }
+        return calcSold
     }
 }

@@ -24,7 +24,7 @@ class ExpensesViewController: UIViewController {
         table.delegate = self
         expenseViewModel = ExpenseViewModel()
         expenseViewModel.delegate = self
-        expenseViewModel.initUserAndPeriod(user: LocalDataBase.getUserInfo()!, forPeriod: 7)
+        expenseViewModel.initUserAndPeriod(forPeriod: 7)
         expenseViewModel.initNotificationObserver()
         
     }

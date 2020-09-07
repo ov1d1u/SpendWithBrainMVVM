@@ -13,8 +13,8 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var emailField: HoshiTextField!
     @IBOutlet weak var passField: HoshiTextField!
+    var loginViewModel = LoginViewModel()
     
-    var loginViewModel : LoginViewModel?
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViewsInLoginScreen()
@@ -50,8 +50,7 @@ class LoginViewController: UIViewController {
         }
     }
     @IBAction func loginBtn(_ sender: UIButton) {
-        loginViewModel = LoginViewModel(email : emailField.text!,password: passField.text!)
-        let errorMessage = loginViewModel!.isInputsValid()
+        let errorMessage = loginViewModel.isInputsValid(email : emailField.text,password: passField.text)
         if errorMessage.count > 0 {
             AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
         }else{

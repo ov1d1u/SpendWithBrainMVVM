@@ -9,16 +9,13 @@
 import Foundation
 
 struct LoginViewModel {
-    var email : String = ""
-    var password : String = ""
     
-    
-    func isInputsValid() -> String {
+    func isInputsValid(email: String?,password: String?) -> String {
         var errorMessage = ""
-        if Validations.emailValid(email: email){
-            if let passInBD = LocalDataBase.getPasswordForLoginCheck(for: email){
+        if email != nil && Validations.emailValid(email: email!){
+            if password != nil, let passInBD = UsersEntity.shared.getPassword(forEmail: email!){
                 if(passInBD == password){
-                    LocalDataBase.saveUserToken(for: email)
+                    LocalDataBase.saveUserToken(for: email!,with: password!)
                 }else{
                     errorMessage = "Please enter correct password for this email."
                 }
@@ -27,6 +24,9 @@ struct LoginViewModel {
             }
         }else{
             errorMessage = "Please enter correct email format."
+        }
+        if errorMessage.count == 0{
+            LocalDataBase.saveUserToken(for: email!, with: password!)
         }
         return errorMessage
     }

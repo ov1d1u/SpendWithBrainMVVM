@@ -20,15 +20,16 @@ class AddViewModel  {
         if expense.details.count == 0 {
             message.append("Please, get some details about this expense.\n")
         }
-        return message
-    }
-    
-    func addExpense(expense :Expense){
-        var userInfo = LocalDataBase.getUserInfo()!
-        userInfo.expenses.append(expense)
-        if LocalDataBase.updateUserInfo(for: userInfo){
+        if message == ""{
+           _ = ExpenseEntity.shared.insert(date: expense.date,
+                                           amount: Double(expense.amount),
+                                           category: expense.category!,
+                                           details: expense.details,
+                                           image: expense.image,
+                                           userEmail: LocalDataBase.getToken())
             Utils.updateMainScreens()
         }
+        return message
     }
     
 }

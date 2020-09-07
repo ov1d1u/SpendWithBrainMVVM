@@ -17,12 +17,12 @@ struct ExpenseDataModel{
     var expenses : [Expense]
 }
 class ExpenseViewModel{
-    var user = User(password: "", name: "")
+    var allExpenses = [Expense]()
     var model : ExpenseDataModel?
     var delegate : RefreshViewModelDelegate?
     
-    func initUserAndPeriod(user : User,forPeriod period : Int){
-        self.user = user
+    func initUserAndPeriod(forPeriod period : Int){
+        self.allExpenses = ExpenseEntity.shared.getAllExpense()
         setModel(forPeriod: period)
     }
     
@@ -39,7 +39,7 @@ class ExpenseViewModel{
     }
     
     func updateUserInfo(){
-        user = LocalDataBase.getUserInfo()!
+        self.allExpenses = ExpenseEntity.shared.getAllExpense()
     }
     
     
@@ -66,11 +66,10 @@ class ExpenseViewModel{
     }
     
     private func getExpenses(for days: Int)-> [Expense]{
-        let userExpenses = user.expenses
         var expensesForPeriod = [Expense]()
         let calendar = Calendar.current
         let today = Date()
-        for exp in userExpenses{
+        for exp in allExpenses{
             if exp.date >= calendar.date(byAdding: Calendar.Component.day, value: -days, to: today)!{
                 expensesForPeriod.append(exp)
             }
@@ -134,7 +133,7 @@ class ExpenseViewModel{
     }
     
     func getSoldForThisExpense(at index: Int)-> Float{
-        var currSold = user.sold
+        var currSold = allExpenses.sold
         if index == 0 {
             return currSold
         }

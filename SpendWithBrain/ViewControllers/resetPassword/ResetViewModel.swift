@@ -10,17 +10,19 @@ import Foundation
 import UIKit
 
 struct ResetViewModel{
-    var email : String = ""
     
-    func isInputsValid() -> (String,String) {
+    func isInputsValid(email : String?) -> (String,String) {
         var title = ""
         var message = ""
-        if Validations.emailValid(email: email){
-            if LocalDataBase.checkIfUserExist(for: email){
-                title = email
-                message = LocalDataBase.getPasswordForLoginCheck(for: email)!
+        if email != nil, Validations.emailValid(email: email!){
+            if UsersEntity.shared.chechIfUserExist(for: email!){
+                title = email!
             }else{
                 title = "Error"
+            }
+            if let pass = UsersEntity.shared.getPassword(forEmail: email!){
+                message = String(pass)
+            }else{
                 message = "User with this email doesn't exist."
             }
         }else{

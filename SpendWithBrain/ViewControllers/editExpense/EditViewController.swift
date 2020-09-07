@@ -114,9 +114,8 @@ class EditViewController: UIViewController , setAmountFromConverter {
         expenseRecieve?.details = detailsInput.text ?? ""
         expenseRecieve?.date = dataPicker.date
         
-        let errorMessage = editViewModel.isExpenseValid(expense: expenseRecieve!)
+        let errorMessage = editViewModel.isExpenseValid(id: oldDate!,expense: expenseRecieve!)
         if errorMessage.count<1 {
-            editViewModel.saveEditExpense(expenseRecieve!, oldDate!)
             _ = navigationController?.popViewController(animated: true)
         }else{
             AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
