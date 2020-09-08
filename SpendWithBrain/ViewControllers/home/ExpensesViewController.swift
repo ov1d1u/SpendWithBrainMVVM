@@ -16,17 +16,14 @@ class ExpensesViewController: UIViewController {
     @IBOutlet weak var table: UITableView!
 
     private var infoView : ShowInfoViewController?
-    private var expenseViewModel : ExpenseViewModel!
+    private var expenseViewModel = ExpenseViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         table.dataSource = self
         table.delegate = self
-        expenseViewModel = ExpenseViewModel()
         expenseViewModel.delegate = self
         expenseViewModel.initUserAndPeriod(forPeriod: 7)
-        expenseViewModel.initNotificationObserver()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +69,7 @@ class ExpensesViewController: UIViewController {
 }
 extension ExpensesViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return expenseViewModel.model!.expenses.count
+        return expenseViewModel.model?.expenses.count ?? 0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

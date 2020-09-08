@@ -8,6 +8,8 @@
 
 import Foundation
 import Charts
+import FirebaseDatabase
+import Firebase
 
 protocol RefreshViewModelDelegate {
     func refreshUI()
@@ -25,22 +27,37 @@ class HomeViewModel {
     var expenses = [Expense]()
     var model : HomeModel?
     var delegate : RefreshViewModelDelegate?
+    var delegateGreeting : ShowGreetingMessage?
     
     
-    func initializeViewModelNotifi(){
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshUserData"), object: nil)
-    }
     
     func initializeUser(){
-        self.expenses = ExpenseEntity.shared.getAllExpense()
-        setModel()
-        delegate?.refreshUI()
-    }
-    
-    @objc func refreshUserData(_ notification: Notification){
-        self.expenses = ExpenseEntity.shared.getAllExpense()
-        setModel()
-        delegate?.refreshUI()
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value) { (snapShot) in
+            self.expenses.removeAll()
+            for expense in snapShot.value as? [String : AnyObject] ?? [:] {
+                //get date
+                let addedDateFormatter = DateFormatter()
+                addedDateFormatter.dateFormat = "yyyy-MM-d HH:mm:ss Z"
+                let date = addedDateFormatter.date(from: expense.value["date"]! as! String)!
+                //get amount
+                let amountNumber = (expense.value["amount"]!)! as! NSNumber
+                //get category
+                let categoryRaw = (expense.value["category"]!)! as! String
+                let category = CategoryEnum.init(rawValue: categoryRaw)!
+                //get details and image
+                let details = (expense.value["details"]!)! as! String
+                let image = (expense.value["image"]!)! as! String
+                //add to expense array
+                self.expenses.append(Expense(expense.key,date, amountNumber.floatValue, category, details, image))
+            }
+            print(self.expenses)
+            self.setModel()
+            self.delegate?.refreshUI()
+            if self.expenses.count == 0 {
+                self.delegateGreeting?.showGreeting()
+            }
+        }
+        
     }
     
     func setModel(){
@@ -50,10 +67,6 @@ class HomeViewModel {
                           monthExpense: String(self.getExpenses(for: 30,with: expenses).rounded(toPlaces: 2)),
                           dataSetChart: self.getDataSetChart(with: expenses),
                           xValueChart: self.getArrayMonth())
-    }
-    
-    func isNewUser() -> Bool{
-        return expenses.count == 0
     }
     
     private func getExpenses(for days: Int,with userDetails: [Expense])-> Float{

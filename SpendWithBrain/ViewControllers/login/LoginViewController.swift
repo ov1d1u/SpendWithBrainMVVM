@@ -8,21 +8,25 @@
 
 import UIKit
 import TextFieldEffects
+import FirebaseDatabase
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController , LoginNavProtocol{
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var emailField: HoshiTextField!
     @IBOutlet weak var passField: HoshiTextField!
     var loginViewModel = LoginViewModel()
+    var expArr = [Expense]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViewsInLoginScreen()
+        loginViewModel.delegate = self 
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        checkAutologin()
+    
+        // TODO: implement autologi
     }
     
     
@@ -42,27 +46,37 @@ class LoginViewController: UIViewController {
     
     @objc private func toggleViewPass(){
         passField.isSecureTextEntry = !passField.isSecureTextEntry
+        
+        //update expense
+//        let id = expArr.first!.id!
+//        Database.database().reference().child("users/jora/expenses/\(id)").updateChildValues(["date":Date().description,
+//                                                                                              "amount":22222.1,
+//                                                                                              "category":"Travel",
+//                                                                                              "details":"detalii updatare",
+//                                                                                              "image":"imagiene updatata"])
     }
     
-    private func checkAutologin(){
-        if LocalDataBase.checkToken(){
-            redirectToHome()
-        }
-    }
     @IBAction func loginBtn(_ sender: UIButton) {
+        //delete expense
+//        let id = expArr.first!.id!
+//        Database.database().reference().child("users/jora/expenses/\(id)").removeValue()
+        
+        
         let errorMessage = loginViewModel.isInputsValid(email : emailField.text,password: passField.text)
         if errorMessage.count > 0 {
-            AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
-        }else{
-            redirectToHome()
+            showError(errorMessage)
         }
     }
     
-    private func redirectToHome(){
+    func redirectToHome(){
         let storyboard = UIStoryboard(name: "Home", bundle: nil)
         if let vc = storyboard.instantiateInitialViewController(){
             present(vc, animated: true, completion: nil)
         }
+    }
+    
+    func showError(_ errorMessage :String){
+        AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
     }
 }
 

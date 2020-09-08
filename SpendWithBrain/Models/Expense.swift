@@ -9,12 +9,21 @@
 import Foundation
 import UIKit
 struct Expense : Codable,CustomStringConvertible{
+    var id : String?
     var date : Date
     var amount : Float
     var category : CategoryEnum?
     var details : String
     var image : String
     
+    init(_ id : String,_ date : Date,_ amount: Float,_ category : CategoryEnum?,_ details : String,_ image : String) {
+        self.id = id
+        self.date = date
+        self.amount = amount
+        self.category = category
+        self.details = details
+        self.image = image
+    }
     
     init(_ date : Date,_ amount: Float,_ category : CategoryEnum?,_ details : String,_ image : String) {
         self.date = date

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import Firebase
 
 class AddViewModel  {
     func isExpenseValid(expense : Expense) -> String {
@@ -21,12 +23,18 @@ class AddViewModel  {
             message.append("Please, get some details about this expense.\n")
         }
         if message == ""{
-           _ = ExpenseEntity.shared.insert(date: expense.date,
-                                           amount: Double(expense.amount),
-                                           category: expense.category!,
-                                           details: expense.details,
-                                           image: expense.image,
-                                           userEmail: LocalDataBase.getToken())
+            let rootPath = "users/\(Auth.auth().currentUser!.uid)/expenses"
+            _ = Database.database().reference().child(rootPath).childByAutoId().setValue(["date":expense.date.description,
+                                                                                          "amount":expense.amount,
+                                                                                          "category":expense.category!.rawValue,
+                                                                                          "details":expense.details,
+                                                                                          "image":expense.image])
+//           _ = ExpenseEntity.shared.insert(date: expense.date,
+//                                           amount: Double(expense.amount),
+//                                           category: expense.category!,
+//                                           details: expense.details,
+//                                           image: expense.image,
+//                                           userEmail: LocalDataBase.getToken())
             Utils.updateMainScreens()
         }
         return message

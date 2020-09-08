@@ -17,6 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        if Auth.auth().currentUser != nil{
+            print("AppDelegate -> Autologin with : \(Auth.auth().currentUser!.email!)")
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            if let vc = storyboard.instantiateInitialViewController(){
+                self.window?.rootViewController = vc
+            }
+        }
         return true
     }
 

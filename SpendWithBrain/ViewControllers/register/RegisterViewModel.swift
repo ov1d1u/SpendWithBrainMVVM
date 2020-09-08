@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import FirebaseDatabase
+import Firebase
 
 struct RegisterViewModel {
     
@@ -25,6 +27,17 @@ struct RegisterViewModel {
         }
         
         if errorMessage.count==0 {
+            Auth.auth().createUser(withEmail: email!, password: password!) { authResult, error in
+                if authResult != nil {
+                    let userID = authResult!.user.uid
+                    _ = Database.database().reference().child("users/\(userID)/name").setValue(name)
+                }
+                if error != nil {
+                    errorMessage = error!.localizedDescription
+                }
+            }
+            
+            
             _ = UsersEntity.shared.insert(email: email!, password: password!, name: name!)
         }
         return ("Error",errorMessage)

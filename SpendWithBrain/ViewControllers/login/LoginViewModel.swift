@@ -7,27 +7,39 @@
 //
 
 import Foundation
+import Firebase
 
-struct LoginViewModel {
+class LoginViewModel {
+    var delegate : LoginNavProtocol?
     
     func isInputsValid(email: String?,password: String?) -> String {
         var errorMessage = ""
         if email != nil && Validations.emailValid(email: email!){
-            if password != nil, let passInBD = UsersEntity.shared.getPassword(forEmail: email!){
-                if(passInBD == password){
-                    LocalDataBase.saveUserToken(for: email!,with: password!)
-                }else{
-                    errorMessage = "Please enter correct password for this email."
+            //signin
+            if password != nil && (password?.count)!>0 {
+                Auth.auth().signIn(withEmail: email!, password: password!) { authResult, error in
+                    if authResult != nil{
+                        let id = authResult!.user.uid
+                        Database.database().reference().child("users/\(id)/name").observe(.value) { (snapShot) in
+                            let name = snapShot.value as! String
+                            LocalDataBase.saveName(name)
+                        }
+                        self.delegate?.redirectToHome()
+                    }else{
+                        self.delegate?.showError("User with this email not exist or you get wrong password.")
+                    }
                 }
             }else{
-                errorMessage = "You get wrong email or user with this email not exist."
+                errorMessage = "Please enter password."
             }
         }else{
             errorMessage = "Please enter correct email format."
         }
-        if errorMessage.count == 0{
-            LocalDataBase.saveUserToken(for: email!, with: password!)
-        }
         return errorMessage
     }
+}
+
+protocol LoginNavProtocol {
+    func redirectToHome()
+    func showError(_ errorMessage :String)
 }

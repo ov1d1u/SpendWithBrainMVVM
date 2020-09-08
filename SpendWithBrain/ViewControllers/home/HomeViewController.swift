@@ -9,7 +9,7 @@
 import UIKit
 import Charts
 
-class HomeViewController: UIViewController{
+class HomeViewController: UIViewController, ShowGreetingMessage{
 
     @IBOutlet weak var currentBalanceViewContainer: UIView!
     @IBOutlet weak var todatExpenseViewContainer: UIView!
@@ -24,8 +24,8 @@ class HomeViewController: UIViewController{
         customize()
         
         bugdetViewModel = HomeViewModel()
-        bugdetViewModel.initializeViewModelNotifi()
         bugdetViewModel.delegate = self
+        bugdetViewModel.delegateGreeting = self
         bugdetViewModel.initializeUser()
         
     }
@@ -41,11 +41,11 @@ class HomeViewController: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tabBarController?.navigationItem.title = "My Budget"
-        if(bugdetViewModel.isNewUser()){
-            AlertService.showAlert(style: .alert, title: "Hello, dear user", message: "Now you have no expenses, to start see the Add button at the top right.")
-        }
     }
     
+    func showGreeting(){
+        AlertService.showAlert(style: .alert, title: "Hello, dear user", message: "Now you have no expenses, to start see the Add button at the top right.")
+    }
     
     
     private func customize(){
@@ -74,6 +74,10 @@ extension HomeViewController : RefreshViewModelDelegate {
         chartDetails.data = model.dataSetChart
         chartDetails.xAxis.valueFormatter = IndexAxisValueFormatter(values: model.xValueChart)
     }
+}
+
+protocol ShowGreetingMessage {
+    func showGreeting()
 }
 
 

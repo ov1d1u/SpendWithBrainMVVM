@@ -8,6 +8,8 @@
 
 import Foundation
 import Charts
+import FirebaseDatabase
+import Firebase
 
 
 struct ExpenseDataModel{
@@ -22,13 +24,30 @@ class ExpenseViewModel{
     var delegate : RefreshViewModelDelegate?
     
     func initUserAndPeriod(forPeriod period : Int){
-        self.allExpenses = ExpenseEntity.shared.getAllExpense()
-        setModel(forPeriod: period)
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value) { (snapShot) in
+            self.allExpenses.removeAll()
+            for expense in snapShot.value as? [String : AnyObject] ?? [:] {
+                //get date
+                let addedDateFormatter = DateFormatter()
+                addedDateFormatter.dateFormat = "yyyy-MM-d HH:mm:ss Z"
+                let date = addedDateFormatter.date(from: expense.value["date"]! as! String)!
+                //get amount
+                let amountNumber = (expense.value["amount"]!)! as! NSNumber
+                //get category
+                let categoryRaw = (expense.value["category"]!)! as! String
+                let category = CategoryEnum.init(rawValue: categoryRaw)!
+                //get details and image
+                let details = (expense.value["details"]!)! as! String
+                let image = (expense.value["image"]!)! as! String
+                //add to expense array
+                self.allExpenses.append(Expense(expense.key,date, amountNumber.floatValue, category, details, image))
+            }
+            print(self.allExpenses)
+            self.setModel(forPeriod: period)
+            self.delegate?.refreshUI()
+        }
     }
     
-    func initNotificationObserver(){
-        NotificationCenter.default.addObserver(self, selector: #selector(refreshUserData(_:)), name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
-    }
     
     func setModel(forPeriod period: Int){
         model = ExpenseDataModel(totalExpense: String(getSoldForPeriod(getExpenses(for: period)).rounded(toPlaces: 2)),
@@ -36,25 +55,6 @@ class ExpenseViewModel{
                                  period: period,
                                  expenses : getExpenses(for: period))
         delegate?.refreshUI()
-    }
-    
-    func updateUserInfo(){
-        self.allExpenses = ExpenseEntity.shared.getAllExpense()
-    }
-    
-    
-    @objc func refreshUserData(_ notification: Notification){
-        updateUserInfo()
-        switch model?.period {
-        case 7: print("Selected week info")
-        setModel(forPeriod: 7)
-        case 30: print("Selected month info")
-        setModel(forPeriod: 30)
-        case 365: print("Selected year info")
-        setModel(forPeriod: 365)
-        default:
-            break
-        }
     }
     
     private func getSoldForPeriod(_ expenses : [Expense]) -> Float{

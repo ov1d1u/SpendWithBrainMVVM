@@ -40,4 +40,12 @@ class LocalDataBase{
         return false
     }
     
+    static func saveName(_ name : String){
+        defaults.set(name, forKey: "name")
+    }
+    
+    static func getName() -> String{
+        return defaults.string(forKey: "name")!
+    }
+    
 }
