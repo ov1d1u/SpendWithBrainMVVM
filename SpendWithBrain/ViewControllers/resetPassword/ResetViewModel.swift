@@ -8,24 +8,25 @@
 
 import Foundation
 import Firebase
-
+protocol ShowResetAlert{
+    func alert(_ title: String,_ message : String)
+}
 struct ResetViewModel{
+    var delegate : ShowResetAlert?
     
-    func isInputsValid(email : String?) -> (String,String) {
-        var title = "Error"
-        var message = ""
+    func isInputsValid(email : String?)  {
         if email != nil, Validations.emailValid(email: email!){
             Auth.auth().sendPasswordReset(withEmail: email!) {(error) in
                 if error != nil {
-                    message = error!.localizedDescription
+                    //delegate show error
+                    self.delegate?.alert("Error", error!.localizedDescription)
                 }else{
-                    title = "Reset password"
-                    message = "Check you e-mail inbox."
+                    //delegate show info
+                    self.delegate?.alert("Reset password", "Check your inbox")
                 }
             }
         }else{
-            message = "Wrong email format."
+            self.delegate?.alert("Error", "Wrong email format.")
         }
-        return (title,message)
     }
 }

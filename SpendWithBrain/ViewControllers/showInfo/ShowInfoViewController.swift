@@ -45,8 +45,8 @@ class ShowInfoViewController: UIViewController{
         amount.text = String((expense?.amount.rounded(toPlaces: 2))!)
         details.text = expense?.details
         let uid = Auth.auth().currentUser!.uid
-        let islandRef = Storage.storage().reference().child("\(uid)/\(expense!.image)")
-        islandRef.getData(maxSize: 1 * 2000 * 2000) { data, error in
+        let ref = Storage.storage().reference().child("\(uid)/\(expense!.image)")
+        ref.getData(maxSize: 1 * 2000 * 2000) { data, error in
             if error != nil {
                 self.photoImg.image = #imageLiteral(resourceName: "chitanta")
             } else {

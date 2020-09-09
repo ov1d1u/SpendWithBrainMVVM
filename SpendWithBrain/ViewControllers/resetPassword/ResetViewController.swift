@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ResetViewController: UIViewController {
+class ResetViewController: UIViewController, ShowResetAlert{
+
+    
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetBtn: UIButton!
@@ -17,17 +19,17 @@ class ResetViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViewsInLoginScreen();
+        resetViewModel.delegate = self
     }
     
     private func customizeViewsInLoginScreen(){
         resetBtn.layer.cornerRadius = 4
     }
     @IBAction func resetBtnClick(_ sender: UIButton) {
-        let (title,message) = resetViewModel.isInputsValid(email: emailField.text)
-        showAlert(title,message)
+        resetViewModel.isInputsValid(email: emailField.text)
     }
     
-    func showAlert(_ title: String,_ message : String){
+    func alert(_ title: String,_ message : String) {
         let okAction = UIAlertAction(title: "OK", style: .default,handler: { (action) in
             let storyboard = UIStoryboard(name: "Login", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "Login") as UIViewController
