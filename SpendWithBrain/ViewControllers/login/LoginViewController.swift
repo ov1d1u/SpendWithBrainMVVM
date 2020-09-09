@@ -15,7 +15,6 @@ class LoginViewController: UIViewController , LoginNavProtocol{
     @IBOutlet weak var emailField: HoshiTextField!
     @IBOutlet weak var passField: HoshiTextField!
     var loginViewModel = LoginViewModel()
-    var expArr = [Expense]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +24,6 @@ class LoginViewController: UIViewController , LoginNavProtocol{
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    
-        // TODO: implement autologi
     }
     
     
@@ -46,22 +43,9 @@ class LoginViewController: UIViewController , LoginNavProtocol{
     
     @objc private func toggleViewPass(){
         passField.isSecureTextEntry = !passField.isSecureTextEntry
-        
-        //update expense
-//        let id = expArr.first!.id!
-//        Database.database().reference().child("users/jora/expenses/\(id)").updateChildValues(["date":Date().description,
-//                                                                                              "amount":22222.1,
-//                                                                                              "category":"Travel",
-//                                                                                              "details":"detalii updatare",
-//                                                                                              "image":"imagiene updatata"])
     }
     
     @IBAction func loginBtn(_ sender: UIButton) {
-        //delete expense
-//        let id = expArr.first!.id!
-//        Database.database().reference().child("users/jora/expenses/\(id)").removeValue()
-        
-        
         let errorMessage = loginViewModel.isInputsValid(email : emailField.text,password: passField.text)
         if errorMessage.count > 0 {
             showError(errorMessage)

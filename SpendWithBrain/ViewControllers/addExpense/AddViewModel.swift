@@ -11,7 +11,7 @@ import FirebaseDatabase
 import Firebase
 
 class AddViewModel  {
-    func isExpenseValid(expense : Expense) -> String {
+    func isExpenseValid(expense : Expense,img : UIImage) -> String {
         var message = ""
         if expense.category == nil {
             message.append("Select one category.\n")
@@ -29,13 +29,9 @@ class AddViewModel  {
                                                                                           "category":expense.category!.rawValue,
                                                                                           "details":expense.details,
                                                                                           "image":expense.image])
-//           _ = ExpenseEntity.shared.insert(date: expense.date,
-//                                           amount: Double(expense.amount),
-//                                           category: expense.category!,
-//                                           details: expense.details,
-//                                           image: expense.image,
-//                                           userEmail: LocalDataBase.getToken())
-            Utils.updateMainScreens()
+            let uid = Auth.auth().currentUser!.uid
+            let islandRef = Storage.storage().reference().child("\(uid)/\(expense.image)")
+            islandRef.putData(img.pngData()!)
         }
         return message
     }

@@ -78,7 +78,7 @@ class AddExpenseViewController: UIViewController{
         }
         let detailsText = detailsInput.text ?? ""
         let expense = Expense(dataPicker.date, floatValueOfAmount, currentCategory, detailsText, imagePath)
-        let message = addViewModel.isExpenseValid(expense: expense)
+        let message = addViewModel.isExpenseValid(expense: expense,img: imageView.image!)
         if message.count<1 {
             _ = navigationController?.popViewController(animated: true)
         }else{
@@ -110,12 +110,14 @@ extension AddExpenseViewController : UIImagePickerControllerDelegate , UINavigat
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            imagePath = Utils.saveImageToDocumentDirectory(image: editedImage)
-            
+            let editedImageResized = Utils.ResizeImage(image: editedImage)
+            imagePath = Utils.randomString()
+            imageView.image = editedImageResized
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            imagePath = Utils.saveImageToDocumentDirectory(image: originalImage)
+            let originalImageResized = Utils.ResizeImage(image: originalImage)
+            imagePath = Utils.randomString()
+            imageView.image = originalImageResized
         }
-        imageView.image = Utils.getImage(imageName: imagePath)
         dismiss(animated: true)
     }
 }

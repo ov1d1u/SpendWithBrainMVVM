@@ -8,10 +8,10 @@
 
 import UIKit
 import TextFieldEffects
+import Firebase
 
 class EditViewController: UIViewController , setAmountFromConverter {
     var expenseRecieve : Expense?
-    var oldDate : Date?
     
     @IBOutlet weak var amount: HoshiTextField!
     @IBOutlet var categoryViewArray: [UIView]!
@@ -24,6 +24,19 @@ class EditViewController: UIViewController , setAmountFromConverter {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadInitialImage()
+    }
+    
+    private func loadInitialImage(){
+        let uid = Auth.auth().currentUser!.uid
+        let islandRef = Storage.storage().reference().child("\(uid)/\(expenseRecieve!.image)")
+        islandRef.getData(maxSize: 1 * 2000 * 2000) { data, error in
+            if error != nil {
+                self.imageView.image = #imageLiteral(resourceName: "chitanta")
+            } else {
+                self.imageView.image = UIImage(data: data!)
+            }
+        }
     }
     
     
@@ -33,7 +46,6 @@ class EditViewController: UIViewController , setAmountFromConverter {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        oldDate = expenseRecieve?.date
         customizeScreen()
     }
     
@@ -47,7 +59,6 @@ class EditViewController: UIViewController , setAmountFromConverter {
         currentCategory = expenseRecieve!.category
         selectCurrentCategory()
         detailsInput.text = expenseRecieve!.details
-        imageView.image = Utils.getImage(imageName: expenseRecieve!.image)
     }
     
     private func setupCategoriesViews(){
@@ -72,11 +83,26 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     @IBAction func savePhotoClick(_ sender: UIButton) {
-        print("utilizand date locale nu am nevoie de tine, thx")
+        guard let image = imageView.image else { return }
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
     }
     
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            // we got back an error!
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
+    }
+
+    
     @IBAction func deleteSelectedPhotoClick(_ sender: UIButton) {
-       expenseRecieve!.image = "Fara poza"
        imageView.image = #imageLiteral(resourceName: "chitanta")
     }
     
@@ -114,7 +140,7 @@ class EditViewController: UIViewController , setAmountFromConverter {
         expenseRecieve?.details = detailsInput.text ?? ""
         expenseRecieve?.date = dataPicker.date
         
-        let errorMessage = editViewModel.isExpenseValid(id: oldDate!,expense: expenseRecieve!)
+        let errorMessage = editViewModel.isExpenseValid(expense: expenseRecieve!,img : imageView.image!)
         if errorMessage.count<1 {
             _ = navigationController?.popViewController(animated: true)
         }else{
@@ -146,11 +172,17 @@ extension EditViewController : UIImagePickerControllerDelegate , UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            expenseRecieve!.image = Utils.saveImageToDocumentDirectory(image : editedImage)
+            let editedImageResized = Utils.ResizeImage(image: editedImage)
+            DispatchQueue.main.async {
+                self.imageView.image = editedImageResized
+            }
+            
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            expenseRecieve!.image = Utils.saveImageToDocumentDirectory(image : originalImage)
+            let originalImageResized = Utils.ResizeImage(image: originalImage)
+            DispatchQueue.main.async {
+                self.imageView.image = originalImageResized
+            }
         }
-        imageView.image = Utils.getImage(imageName: expenseRecieve!.image)
         dismiss(animated: true)
     }
 }

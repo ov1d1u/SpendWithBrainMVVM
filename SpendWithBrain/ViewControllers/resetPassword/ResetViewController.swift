@@ -24,8 +24,15 @@ class ResetViewController: UIViewController {
     }
     @IBAction func resetBtnClick(_ sender: UIButton) {
         let (title,message) = resetViewModel.isInputsValid(email: emailField.text)
-        AlertService.showAlert(style: .alert, title: title, message: message)
+        showAlert(title,message)
     }
     
-    
+    func showAlert(_ title: String,_ message : String){
+        let okAction = UIAlertAction(title: "OK", style: .default,handler: { (action) in
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as UIViewController
+            self.present(vc, animated: true, completion: nil)
+        })
+        AlertService.showAlert(style: .actionSheet, title: title, message: message,actions: [okAction], completion: nil)
+    }
 }

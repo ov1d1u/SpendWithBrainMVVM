@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShowInfoViewController: UIViewController{
     
@@ -24,6 +25,7 @@ class ShowInfoViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -42,7 +44,15 @@ class ShowInfoViewController: UIViewController{
         date.text = showInfoViewModel.getDateFormatForInfo(date: (expense?.date)!)
         amount.text = String((expense?.amount.rounded(toPlaces: 2))!)
         details.text = expense?.details
-        photoImg.image = Utils.getImage(imageName: (expense?.image)!)
+        let uid = Auth.auth().currentUser!.uid
+        let islandRef = Storage.storage().reference().child("\(uid)/\(expense!.image)")
+        islandRef.getData(maxSize: 1 * 2000 * 2000) { data, error in
+            if error != nil {
+                self.photoImg.image = #imageLiteral(resourceName: "chitanta")
+            } else {
+                self.photoImg.image = UIImage(data: data!)
+            }
+        }
     }
     
     @IBAction func deleteClick(_ sender: UIButton) {

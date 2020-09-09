@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Firebase
+import FirebaseDatabase
 
 class ShowInfoViewModel {
     
@@ -18,8 +20,13 @@ class ShowInfoViewModel {
     
     func deleteThisExpense(expense : Expense){
         Utils.deleteDirectory(directoryName: expense.image)
-        ExpenseEntity.shared.deleteExpense(id: expense.date)
-        Utils.updateMainScreens()
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses/\(expense.id!)").removeValue()
+        let uid = Auth.auth().currentUser!.uid
+        Storage.storage().reference().child("\(uid)/\(expense.image)").delete { (error) in
+            if error != nil {
+                print("Wrong instruction")
+            }
+        }
     }
     
 }

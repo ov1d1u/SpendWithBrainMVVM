@@ -16,8 +16,6 @@ struct RegisterViewModel {
         var errorMessage = ""
         if email != nil && !Validations.emailValid(email: email!){
             errorMessage.append("Please,enter correct email format.\n")
-        }else if UsersEntity.shared.getPassword(forEmail: email!) != nil{
-            errorMessage.append("User with this email already exist, try to reset your password.\n")
         }
         if name != nil && !Validations.nameValid(name: name!){
             errorMessage.append("Name must contains only letters and spaces.\n")
@@ -36,9 +34,6 @@ struct RegisterViewModel {
                     errorMessage = error!.localizedDescription
                 }
             }
-            
-            
-            _ = UsersEntity.shared.insert(email: email!, password: password!, name: name!)
         }
         return ("Error",errorMessage)
     }

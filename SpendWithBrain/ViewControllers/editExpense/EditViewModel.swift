@@ -7,10 +7,11 @@
 //
 
 import Foundation
-
+import FirebaseDatabase
+import Firebase
 class EditViewModel {
     
-    func isExpenseValid(id : Date,expense : Expense) -> String {
+    func isExpenseValid(expense : Expense,img : UIImage) -> String {
         var errorMesage = ""
         if expense.category == nil {
             errorMesage.append("Select one category.\n")
@@ -22,12 +23,15 @@ class EditViewModel {
             errorMesage.append("Please, get some details about this expense.\n")
         }
         if errorMesage == ""{
-            ExpenseEntity.shared.updateExpense(id: id, expense: expense)
-            Utils.updateMainScreens()
+            let rootPath = Auth.auth().currentUser!.uid
+            Database.database().reference().child("users/\(rootPath)/expenses/\(expense.id!)").updateChildValues(["date":expense.date.description,
+                                                                                                  "amount":expense.amount,
+                                                                                                  "category":expense.category!.rawValue,
+                                                                                                  "details":expense.details,
+                                                                                                  "image":expense.image])
+            let Ref = Storage.storage().reference().child("\(rootPath)/\(expense.image)")
+            Ref.putData(img.pngData()!)
         }
         return errorMesage
     }
-    
-    
-    
 }

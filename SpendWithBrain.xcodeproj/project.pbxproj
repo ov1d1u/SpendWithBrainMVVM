@@ -54,9 +54,6 @@
 		94F613D624EFA743006AA093 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613D524EFA743006AA093 /* ConverterViewController.swift */; };
 		94F613DC24EFA785006AA093 /* Converter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94F613DB24EFA785006AA093 /* Converter.storyboard */; };
 		94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613DF24EFE150006AA093 /* ExpensesViewController.swift */; };
-		94F6BD8425060940003E27C9 /* DBHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F6BD8325060940003E27C9 /* DBHelper.swift */; };
-		94F6BD8D25060EE1003E27C9 /* UsersEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F6BD8C25060EE1003E27C9 /* UsersEntity.swift */; };
-		94F6BD8F250610CB003E27C9 /* ExpenseEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F6BD8E250610CB003E27C9 /* ExpenseEntity.swift */; };
 		CE16C24E41A9CF2E73341346 /* Pods_SpendWithBrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,9 +110,6 @@
 		94F613D524EFA743006AA093 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		94F613DB24EFA785006AA093 /* Converter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Converter.storyboard; sourceTree = "<group>"; };
 		94F613DF24EFE150006AA093 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
-		94F6BD8325060940003E27C9 /* DBHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBHelper.swift; sourceTree = "<group>"; };
-		94F6BD8C25060EE1003E27C9 /* UsersEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersEntity.swift; sourceTree = "<group>"; };
-		94F6BD8E250610CB003E27C9 /* ExpenseEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpenseEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,7 +223,6 @@
 				94C2A6E124ED6CC9009D644F /* Validations.swift */,
 				94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */,
 				946F9E6224F8DCB500DD26B4 /* Utils.swift */,
-				94F6BD90250612C2003E27C9 /* DataBase */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -339,16 +332,6 @@
 				94F613DB24EFA785006AA093 /* Converter.storyboard */,
 			);
 			path = converter;
-			sourceTree = "<group>";
-		};
-		94F6BD90250612C2003E27C9 /* DataBase */ = {
-			isa = PBXGroup;
-			children = (
-				94F6BD8325060940003E27C9 /* DBHelper.swift */,
-				94F6BD8C25060EE1003E27C9 /* UsersEntity.swift */,
-				94F6BD8E250610CB003E27C9 /* ExpenseEntity.swift */,
-			);
-			path = DataBase;
 			sourceTree = "<group>";
 		};
 		EFE34A3B6683BF82BD85F376 /* Frameworks */ = {
@@ -496,14 +479,12 @@
 				94ACC94C24EEBA46002B9E5B /* MenuViewController.swift in Sources */,
 				94C35A8124ED46220032443F /* RegisterViewController.swift in Sources */,
 				94D80FCA24F6451E006F40FC /* CustomTableViewCell.swift in Sources */,
-				94F6BD8D25060EE1003E27C9 /* UsersEntity.swift in Sources */,
 				94E1835E24EBFEB9002D3E2A /* LoginViewController.swift in Sources */,
 				947C755B25026D0400F874E6 /* ShowInfoViewModel.swift in Sources */,
 				946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */,
 				94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */,
 				94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */,
 				9491DA3924FFCC40006697AF /* ExpenseViewModel.swift in Sources */,
-				94F6BD8425060940003E27C9 /* DBHelper.swift in Sources */,
 				94C35A8A24ED4C0A0032443F /* ResetViewController.swift in Sources */,
 				9425B21624F4EB23004DB666 /* AlertServices.swift in Sources */,
 				94C2A6DD24ED63B2009D644F /* User.swift in Sources */,
@@ -516,7 +497,6 @@
 				94E1835C24EBFEB9002D3E2A /* AppDelegate.swift in Sources */,
 				94ACC94424EE4EA9002B9E5B /* LocalDataBase.swift in Sources */,
 				94C2A6E224ED6CC9009D644F /* Validations.swift in Sources */,
-				94F6BD8F250610CB003E27C9 /* ExpenseEntity.swift in Sources */,
 				947ACF7024F79BC400FEB842 /* EditViewController.swift in Sources */,
 				9414E21625010FCF0093E3A8 /* RegisterViewModel.swift in Sources */,
 				94F613D624EFA743006AA093 /* ConverterViewController.swift in Sources */,

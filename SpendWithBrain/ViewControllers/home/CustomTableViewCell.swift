@@ -36,15 +36,18 @@ class CustomTableViewCell: UITableViewCell {
         imgCat.image = CategoryEnum.getCategoryImage(for: expense!.category!)
         incExp.text = expense!.category == .Income ? "Income" : "Expense"
         amount.text = expense!.category == .Income ? "+\(expense!.amount)" : "-\(expense!.amount)"
-        if expense!.amount < 0.0 {
+        if expense!.category != .Income {
             amount.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
         }else{
             amount.textColor = #colorLiteral(red: 0.1019607843, green: 0.662745098, blue: 0.4470588235, alpha: 1)
         }
         soldAfterExp.text = String(soldAfter.rounded(toPlaces: 2))
-        if soldAfter < 0.0 {
-            soldAfterExp.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+        DispatchQueue.main.async {
+            if soldAfter < 0.0 {
+                self.soldAfterExp.textColor = #colorLiteral(red: 0.9921568627, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+            }
         }
+        
     }
     
     private func getDayString(date : Date) -> String{
