@@ -19,7 +19,6 @@ class ShowInfoViewModel {
     }
     
     func deleteThisExpense(expense : Expense){
-        Utils.deleteDirectory(directoryName: expense.image)
         Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses/\(expense.id!)").removeValue()
         let uid = Auth.auth().currentUser!.uid
         Storage.storage().reference().child("\(uid)/\(expense.image)").delete { (error) in

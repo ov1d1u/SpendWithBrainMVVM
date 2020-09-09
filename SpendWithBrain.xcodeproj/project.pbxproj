@@ -32,7 +32,6 @@
 		94ACC94724EE96EA002B9E5B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACC94624EE96EA002B9E5B /* HomeViewController.swift */; };
 		94ACC94C24EEBA46002B9E5B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94ACC94B24EEBA46002B9E5B /* MenuViewController.swift */; };
 		94ACC95024EEBD26002B9E5B /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94ACC94F24EEBD26002B9E5B /* Home.storyboard */; };
-		94C2A6DD24ED63B2009D644F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A6DC24ED63B2009D644F /* User.swift */; };
 		94C2A6DF24ED649D009D644F /* Expense.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A6DE24ED649D009D644F /* Expense.swift */; };
 		94C2A6E224ED6CC9009D644F /* Validations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C2A6E124ED6CC9009D644F /* Validations.swift */; };
 		94C35A8124ED46220032443F /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C35A8024ED46220032443F /* RegisterViewController.swift */; };
@@ -86,7 +85,6 @@
 		94ACC94624EE96EA002B9E5B /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		94ACC94B24EEBA46002B9E5B /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		94ACC94F24EEBD26002B9E5B /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
-		94C2A6DC24ED63B2009D644F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		94C2A6DE24ED649D009D644F /* Expense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Expense.swift; sourceTree = "<group>"; };
 		94C2A6E124ED6CC9009D644F /* Validations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validations.swift; sourceTree = "<group>"; };
 		94C35A8024ED46220032443F /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -210,7 +208,6 @@
 		94C2A6D924ED6390009D644F /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				94C2A6DC24ED63B2009D644F /* User.swift */,
 				94C2A6DE24ED649D009D644F /* Expense.swift */,
 				7DBBCB2624F1AFEC008C3A2D /* CurrencyModels.swift */,
 			);
@@ -487,7 +484,6 @@
 				9491DA3924FFCC40006697AF /* ExpenseViewModel.swift in Sources */,
 				94C35A8A24ED4C0A0032443F /* ResetViewController.swift in Sources */,
 				9425B21624F4EB23004DB666 /* AlertServices.swift in Sources */,
-				94C2A6DD24ED63B2009D644F /* User.swift in Sources */,
 				94F613D324EF9FD3006AA093 /* SlideInTransition.swift in Sources */,
 				947ACF7A24F7E86200FEB842 /* setAmountFromConverter.swift in Sources */,
 				94237A1124EFF9D000E86D32 /* AddExpenseViewController.swift in Sources */,
