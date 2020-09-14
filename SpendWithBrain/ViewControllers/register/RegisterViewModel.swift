@@ -14,12 +14,15 @@ struct RegisterViewModel {
     
     func isInputsValid(email : String?,password: String?,name: String?) -> (String,String) {
         var errorMessage = ""
+        
         if email != nil && !Validations.emailValid(email: email!){
             errorMessage.append("Please,enter correct email format.\n")
         }
+        
         if name != nil && !Validations.nameValid(name: name!){
             errorMessage.append("Name must contains only letters and spaces.\n")
         }
+        
         if password != nil && !Validations.passValid(pass: password!){
             errorMessage.append("Password must contains minimum 1 small letter,1 uppercase letter,1 digit,1 special caracter,length of password must be bigger(or equal) than 8\n")
         }

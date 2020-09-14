@@ -11,7 +11,6 @@ import TextFieldEffects
 import Firebase
 
 class EditViewController: UIViewController , setAmountFromConverter {
-    var expenseRecieve : Expense?
     
     @IBOutlet weak var amount: HoshiTextField!
     @IBOutlet var categoryViewArray: [UIView]!
@@ -19,8 +18,9 @@ class EditViewController: UIViewController , setAmountFromConverter {
     @IBOutlet weak var detailsInput: UITextField!
     @IBOutlet weak var imageView: UIImageView!
     
+    var expenseRecieve : Expense?
     private var currentCategory : CategoryEnum?
-    var editViewModel = EditViewModel()
+    private var editViewModel = EditViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +38,6 @@ class EditViewController: UIViewController , setAmountFromConverter {
             }
         }
     }
-    
     
     func setAmount(_ amountFromConverter: String) {
         expenseRecieve!.amount = Float(amountFromConverter)!
@@ -99,7 +98,6 @@ class EditViewController: UIViewController , setAmountFromConverter {
             present(ac, animated: true)
         }
     }
-
     
     @IBAction func deleteSelectedPhotoClick(_ sender: UIButton) {
        imageView.image = #imageLiteral(resourceName: "chitanta")

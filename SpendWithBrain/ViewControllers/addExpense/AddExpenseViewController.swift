@@ -18,8 +18,7 @@ class AddExpenseViewController: UIViewController{
     
     private var currentCategory : CategoryEnum?
     private var imagePath : String = ""
-    
-    var addViewModel = AddViewModel()
+    private var addViewModel = AddViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +85,6 @@ class AddExpenseViewController: UIViewController{
         }
     }
 }
-
 
 extension AddExpenseViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate{
     func showImagePickerControllerActionSheet(){

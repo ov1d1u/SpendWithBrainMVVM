@@ -14,6 +14,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
+    
     var registerViewModel = RegisterViewModel()
     
     override func viewDidLoad() {

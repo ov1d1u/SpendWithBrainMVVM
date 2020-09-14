@@ -49,10 +49,12 @@
 		94E1836324EBFEBB002D3E2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 94E1836224EBFEBB002D3E2A /* Assets.xcassets */; };
 		94E1836624EBFEBB002D3E2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94E1836424EBFEBB002D3E2A /* LaunchScreen.storyboard */; };
 		94E1836F24EC0307002D3E2A /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 94E1836E24EC0307002D3E2A /* .gitignore */; };
+		94F3E6A8250F5DDA0068AFC1 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F3E6A7250F5DDA0068AFC1 /* Protocols.swift */; };
 		94F613D324EF9FD3006AA093 /* SlideInTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613D224EF9FD3006AA093 /* SlideInTransition.swift */; };
 		94F613D624EFA743006AA093 /* ConverterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613D524EFA743006AA093 /* ConverterViewController.swift */; };
 		94F613DC24EFA785006AA093 /* Converter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94F613DB24EFA785006AA093 /* Converter.storyboard */; };
 		94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613DF24EFE150006AA093 /* ExpensesViewController.swift */; };
+		94FA121F2509047F008846E5 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FA121E2509047F008846E5 /* UserNotifications.swift */; };
 		CE16C24E41A9CF2E73341346 /* Pods_SpendWithBrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */; };
 /* End PBXBuildFile section */
 
@@ -104,10 +106,12 @@
 		94E1836524EBFEBB002D3E2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		94E1836724EBFEBB002D3E2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		94E1836E24EC0307002D3E2A /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		94F3E6A7250F5DDA0068AFC1 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		94F613D224EF9FD3006AA093 /* SlideInTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideInTransition.swift; sourceTree = "<group>"; };
 		94F613D524EFA743006AA093 /* ConverterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConverterViewController.swift; sourceTree = "<group>"; };
 		94F613DB24EFA785006AA093 /* Converter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Converter.storyboard; sourceTree = "<group>"; };
 		94F613DF24EFE150006AA093 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
+		94FA121E2509047F008846E5 /* UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,14 +144,6 @@
 				947C755C2502751C00F874E6 /* AddViewModel.swift */,
 			);
 			path = addExpense;
-			sourceTree = "<group>";
-		};
-		946D52A925011D9F008A3C5F /* ConverterViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				946D52AA25011DBA008A3C5F /* ConverterViewModel.swift */,
-			);
-			path = ConverterViewModel;
 			sourceTree = "<group>";
 		};
 		947ACF6D24F79B9800FEB842 /* showInfo */ = {
@@ -193,6 +189,7 @@
 				94ACC94B24EEBA46002B9E5B /* MenuViewController.swift */,
 				94F613D224EF9FD3006AA093 /* SlideInTransition.swift */,
 				94D80FC924F6451E006F40FC /* CustomTableViewCell.swift */,
+				94F3E6A7250F5DDA0068AFC1 /* Protocols.swift */,
 			);
 			path = home;
 			sourceTree = "<group>";
@@ -220,6 +217,7 @@
 				94C2A6E124ED6CC9009D644F /* Validations.swift */,
 				94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */,
 				946F9E6224F8DCB500DD26B4 /* Utils.swift */,
+				94FA121E2509047F008846E5 /* UserNotifications.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -324,7 +322,7 @@
 		94F613D424EFA730006AA093 /* converter */ = {
 			isa = PBXGroup;
 			children = (
-				946D52A925011D9F008A3C5F /* ConverterViewModel */,
+				946D52AA25011DBA008A3C5F /* ConverterViewModel.swift */,
 				94F613D524EFA743006AA093 /* ConverterViewController.swift */,
 				94F613DB24EFA785006AA093 /* Converter.storyboard */,
 			);
@@ -480,8 +478,10 @@
 				947C755B25026D0400F874E6 /* ShowInfoViewModel.swift in Sources */,
 				946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */,
 				94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */,
+				94F3E6A8250F5DDA0068AFC1 /* Protocols.swift in Sources */,
 				94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */,
 				9491DA3924FFCC40006697AF /* ExpenseViewModel.swift in Sources */,
+				94FA121F2509047F008846E5 /* UserNotifications.swift in Sources */,
 				94C35A8A24ED4C0A0032443F /* ResetViewController.swift in Sources */,
 				9425B21624F4EB23004DB666 /* AlertServices.swift in Sources */,
 				94F613D324EF9FD3006AA093 /* SlideInTransition.swift in Sources */,

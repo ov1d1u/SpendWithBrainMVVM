@@ -13,8 +13,7 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         if Auth.auth().currentUser != nil{
@@ -24,6 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 self.window?.rootViewController = vc
             }
         }
+        CustomNotifications.shared.requestAuthorization()
         return true
     }
 
@@ -51,4 +51,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
-

@@ -10,19 +10,24 @@ import Foundation
 import Alamofire
 
 struct ConverterViewModel {
+    
     var leftInput : String = ""
     var rightInput : String = ""
+    
     var leftSelectedCurrency = Currency.EUR{
         didSet{
             didSetRight(str: rightInput)
         }
     }
+    
     var rightSelectedCurrency = Currency.RON{
         didSet{
             didSetLeft(str: leftInput)
         }
     }
-    var rates : Rates? 
+    
+    var rates : Rates?
+    
     var currentRate : Double {
         get{
             if rates != nil {
@@ -32,6 +37,7 @@ struct ConverterViewModel {
             }
         }
     }
+    
     mutating func didSetRight(str :String){
         if str.count>0{
             self.leftInput = String(abs((Double(str)!*currentRate)).rounded(toPlaces: 3))
@@ -48,8 +54,6 @@ struct ConverterViewModel {
         }
     } 
 }
-
-
 
 extension Double {
     func rounded(toPlaces places:Int) -> Double {

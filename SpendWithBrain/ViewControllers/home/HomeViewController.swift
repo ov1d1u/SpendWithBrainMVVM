@@ -18,16 +18,16 @@ class HomeViewController: UIViewController, ShowGreetingMessage{
     @IBOutlet weak var weekExp: UILabel!
     @IBOutlet weak var monthExp: UILabel!
     @IBOutlet weak var chartDetails: BarChartView!
+    
     var bugdetViewModel  : HomeViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customize()
-        
         bugdetViewModel = HomeViewModel()
         bugdetViewModel.delegate = self
         bugdetViewModel.delegateGreeting = self
         bugdetViewModel.initializeUser()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +46,6 @@ class HomeViewController: UIViewController, ShowGreetingMessage{
     func showGreeting(){
         AlertService.showAlert(style: .alert, title: "Hello, dear user", message: "Now you have no expenses, to start see the Add button at the top right.")
     }
-    
     
     private func customize(){
         //customize design
@@ -75,9 +74,3 @@ extension HomeViewController : RefreshViewModelDelegate {
         chartDetails.xAxis.valueFormatter = IndexAxisValueFormatter(values: model.xValueChart)
     }
 }
-
-protocol ShowGreetingMessage {
-    func showGreeting()
-}
-
-

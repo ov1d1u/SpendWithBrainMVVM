@@ -18,6 +18,7 @@ struct ExpenseDataModel{
     var period : Int
     var expenses : [Expense]
 }
+
 class ExpenseViewModel{
     var allExpenses = [Expense]()
     var model : ExpenseDataModel?
@@ -145,5 +146,15 @@ class ExpenseViewModel{
             }
         }
         return currSold
+    }
+    
+    func deleteThisExpense(expense : Expense){
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses/\(expense.id!)").removeValue()
+        let uid = Auth.auth().currentUser!.uid
+        Storage.storage().reference().child("\(uid)/\(expense.image)").delete { (error) in
+            if error != nil {
+                print("Wrong instruction")
+            }
+        }
     }
 }

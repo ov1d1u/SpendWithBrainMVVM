@@ -20,6 +20,8 @@ class ConverterViewController: UIViewController {
     @IBOutlet weak var rightInput: UITextField!
     @IBOutlet weak var topLabel: UILabel!
     
+    weak var delegate : setAmountFromConverter?
+    var infoFromEdit : String?
     var converterViewModel : ConverterViewModel!{
         didSet{
             leftDrop.text = Currency.getName(converterViewModel.leftSelectedCurrency.rawValue)
@@ -30,9 +32,7 @@ class ConverterViewController: UIViewController {
             rightInput.text = converterViewModel.rightInput
         }
     }
-    weak var delegate : setAmountFromConverter?
     
-    var infoFromEdit : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeScreen()

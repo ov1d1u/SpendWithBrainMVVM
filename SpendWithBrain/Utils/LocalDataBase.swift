@@ -18,4 +18,13 @@ class LocalDataBase{
     static func getName() -> String{
         return defaults.string(forKey: "name")!
     }
+    
+    static func setSold(_ sold : Float) {
+        let soldString = String(sold)
+        defaults.set(soldString, forKey: "sold")
+    }
+    
+    static func getSold()->String{
+        return defaults.string(forKey: "sold") ?? "0.0"
+    }
 }

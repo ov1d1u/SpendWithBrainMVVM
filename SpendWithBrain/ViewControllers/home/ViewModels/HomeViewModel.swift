@@ -11,9 +11,6 @@ import Charts
 import FirebaseDatabase
 import Firebase
 
-protocol RefreshViewModelDelegate {
-    func refreshUI()
-}
 struct HomeModel{
     var currentBalance : String = ""
     var todayExpense : String = ""
@@ -22,14 +19,13 @@ struct HomeModel{
     var dataSetChart : BarChartData = BarChartData()
     var xValueChart : [String] = []
 }
+
 class HomeViewModel {
     
     var expenses = [Expense]()
     var model : HomeModel?
     var delegate : RefreshViewModelDelegate?
     var delegateGreeting : ShowGreetingMessage?
-    
-    
     
     func initializeUser(){
         Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value) { (snapShot) in
@@ -56,6 +52,7 @@ class HomeViewModel {
             if self.expenses.count == 0 {
                 self.delegateGreeting?.showGreeting()
             }
+            CustomNotifications.shared.createNotification(self.expenses.sold)
         }
         
     }
@@ -121,20 +118,22 @@ class HomeViewModel {
         let today = Date()
         let monthComp = Calendar.current.component(.month, from: today)
         var currArray = [String]()
+        
         for mon in stride(from: monthComp, through: 1, by: -1){
             currArray.append(Months[mon-1])
         }
         for mon in monthComp+1...12{
             currArray.append(Months[mon-1])
         }
+        
         currArray.reverse()
         return currArray
     }
     
     private func getNormalizeArrayOfSpend(with userDetails: [Expense]) -> [Double]{
         var monthSpends = [Double](repeating: 0, count: 12)
-        
         let today = Date()
+        
         for index in userDetails.indices{
             if userDetails[index].date >= Calendar.current.date(byAdding: Calendar.Component.day, value: -365, to: today)!{
                 let monthComp = Calendar.current.component(.month, from: userDetails[index].date)
@@ -148,12 +147,15 @@ class HomeViewModel {
         
         var currSpends = [Double]()
         let monthComp = Calendar.current.component(.month, from: today)
+        
         for mon in stride(from: monthComp, through: 1, by: -1){
             currSpends.append(monthSpends[mon-1])
         }
+        
         for mon in monthComp+1...12{
             currSpends.append(monthSpends[mon-1])
         }
+        
         currSpends.reverse()
         return currSpends
     }
@@ -169,6 +171,7 @@ extension Float {
 extension Array where Element == Expense{
     var sold : Float {
         var calcSold : Float = 0
+        
         for index in self.indices{
             if self[index].category == CategoryEnum.Income{
                 calcSold += self[index].amount
@@ -176,6 +179,7 @@ extension Array where Element == Expense{
                 calcSold -= self[index].amount
             }
         }
+        
         return calcSold
     }
 }

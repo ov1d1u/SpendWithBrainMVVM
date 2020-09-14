@@ -8,6 +8,8 @@
 
 import UIKit
 import Charts
+import TinyConstraints
+
 class ExpensesViewController: UIViewController {
     
     @IBOutlet weak var segmentControll: UISegmentedControl!
@@ -32,8 +34,6 @@ class ExpensesViewController: UIViewController {
         self.navigationController?.navigationBar.topItem?.title = "My Expenses"
     }
     
-    
-    
     @IBAction func segmentChange(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: print("Selected week info")
@@ -47,9 +47,6 @@ class ExpensesViewController: UIViewController {
         }
     }
     
-    
-    
-    
     private func customize(){
         segmentControll.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.white], for: .selected)
         segmentControll.setTitleTextAttributes([NSAttributedString.Key.foregroundColor:UIColor.black], for: .normal)
@@ -58,26 +55,17 @@ class ExpensesViewController: UIViewController {
         let pieChartAttrString = NSAttributedString(string: "Quarterly Revenue", attributes: pieChartAttribute)
         chart.centerAttributedText = pieChartAttrString
     }
-    
-    @objc func selectOneExpense(_ sender:UITapGestureRecognizer){
-        let showDialog = ShowInfo()
-        let showVC = showDialog.alert()
-        let cell = sender.view as! CustomTableViewCell
-        showVC.expense = cell.expense
-        present(showVC, animated: true)
-    }
 }
 extension ExpensesViewController : UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return expenseViewModel.model?.expenses.count ?? 0
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = table.dequeueReusableCell(withIdentifier: "custom") as! CustomTableViewCell
         cell.expense = expenseViewModel.model!.expenses[indexPath.row]
         cell.setUI(expenseViewModel.getSoldForThisExpense(at: indexPath.row))
-        let tapGest = UITapGestureRecognizer(target: self, action: #selector(selectOneExpense(_:)))
-        cell.addGestureRecognizer(tapGest)
+        cell.delegate = self
         return cell
 
     }
@@ -87,11 +75,21 @@ extension ExpensesViewController : UITableViewDelegate, UITableViewDataSource{
     }
 }
 
-extension ExpensesViewController : RefreshViewModelDelegate{
+extension ExpensesViewController : RefreshViewModelDelegate,ShowInfoDelegate{
+    func show(_ expense: Expense) {
+        let showDialog = ShowInfo()
+        let showVC = showDialog.alert()
+        showVC.expense = expense
+        present(showVC, animated: true)
+    }
+    
     func refreshUI() {
         amountLabel.text = expenseViewModel.model?.totalExpense
         chart.data = expenseViewModel.model?.pieDataSet
         table.reloadData()
     }
     
+    func delete(_ expense: Expense) {
+        expenseViewModel.deleteThisExpense(expense: expense)
+    }
 }

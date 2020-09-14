@@ -10,8 +10,6 @@ import UIKit
 
 class ResetViewController: UIViewController, ShowResetAlert{
 
-    
-
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var resetBtn: UIButton!
     var resetViewModel = ResetViewModel()
@@ -25,6 +23,7 @@ class ResetViewController: UIViewController, ShowResetAlert{
     private func customizeViewsInLoginScreen(){
         resetBtn.layer.cornerRadius = 4
     }
+    
     @IBAction func resetBtnClick(_ sender: UIButton) {
         resetViewModel.isInputsValid(email: emailField.text)
     }

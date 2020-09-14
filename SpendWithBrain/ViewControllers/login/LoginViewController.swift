@@ -11,9 +11,11 @@ import TextFieldEffects
 import FirebaseDatabase
 
 class LoginViewController: UIViewController , LoginNavProtocol{
+    
     @IBOutlet weak var loginBtn: UIButton!
     @IBOutlet weak var emailField: HoshiTextField!
     @IBOutlet weak var passField: HoshiTextField!
+    
     var loginViewModel = LoginViewModel()
     
     override func viewDidLoad() {
@@ -25,7 +27,6 @@ class LoginViewController: UIViewController , LoginNavProtocol{
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
-    
     
     private func customizeViewsInLoginScreen(){
         //customize login button
