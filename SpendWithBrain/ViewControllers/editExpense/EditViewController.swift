@@ -8,39 +8,58 @@
 
 import UIKit
 import TextFieldEffects
+import Firebase
 
 class EditViewController: UIViewController , setAmountFromConverter {
-    var cell : CustomTableViewCell?
     
     @IBOutlet weak var amount: HoshiTextField!
     @IBOutlet var categoryViewArray: [UIView]!
     @IBOutlet weak var dataPicker: UIDatePicker!
     @IBOutlet weak var detailsInput: UITextField!
-    private var currentCategory : CategoryEnum?
     @IBOutlet weak var imageView: UIImageView!
-    private var imagePath : String?
-    private var converterResponse : String?
+    
+    var expenseRecieve : Expense?
+    private var currentCategory : CategoryEnum?
+    private var editViewModel = EditViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadInitialImage()
+    }
+    
+    private func loadInitialImage(){
+        let uid = Auth.auth().currentUser!.uid
+        let islandRef = Storage.storage().reference().child("\(uid)/\(expenseRecieve!.image)")
+        islandRef.getData(maxSize: 1 * 2000 * 2000) { data, error in
+            if error != nil {
+                self.imageView.image = #imageLiteral(resourceName: "chitanta")
+            } else {
+                self.imageView.image = UIImage(data: data!)
+            }
+        }
     }
     
     func setAmount(_ amountFromConverter: String) {
-
-        converterResponse = amountFromConverter
+        expenseRecieve!.amount = Float(amountFromConverter)!
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         customizeScreen()
-        fillData()
     }
+    
     private func customizeScreen(){
         self.title = "Edit action"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save",style: .plain,target: self,action: #selector(saveClick))
         dataPicker.maximumDate = Date()
         setupCategoriesViews()
+        dataPicker.date = expenseRecieve!.date
+        amount.text = String(expenseRecieve!.amount)
+        currentCategory = expenseRecieve!.category
+        selectCurrentCategory()
+        detailsInput.text = expenseRecieve!.details
     }
+    
     private func setupCategoriesViews(){
         for item in categoryViewArray {
             item.layer.cornerRadius = 4
@@ -49,19 +68,6 @@ class EditViewController: UIViewController , setAmountFromConverter {
             let tapGest = UITapGestureRecognizer(target: self, action: #selector(selectOneCategory(_:)))
             item.addGestureRecognizer(tapGest)
         }
-    }
-    
-    private func fillData() {
-        dataPicker.date = (cell?.date)!
-        let amountTxt = converterResponse ?? cell!.amount.text!
-        let absValAmount = abs(Double(amountTxt)!)
-        amount.text = String(absValAmount)
-        currentCategory = (cell?.category.text).map { CategoryEnum(rawValue: $0) }!
-        selectCurrentCategory()
-        detailsInput.text = cell?.details
-        imagePath = cell?.imagePath
-        print("incarc imaginea din fillData")
-        imageView.image = Utils.getImage(imageName: (imagePath)!)
     }
     
     @IBAction func converterClick(_ sender: UIButton) {
@@ -76,18 +82,31 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     @IBAction func savePhotoClick(_ sender: UIButton) {
-        print("cu salvarea locala nu am nevoie de tine, thx")
+        guard let image = imageView.image else { return }
+        
+        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
+        if let error = error {
+            let ac = UIAlertController(title: "Save error", message: error.localizedDescription, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        } else {
+            let ac = UIAlertController(title: "Saved!", message: "Your altered image has been saved to your photos.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            present(ac, animated: true)
+        }
     }
     
     @IBAction func deleteSelectedPhotoClick(_ sender: UIButton) {
-        imagePath = "Fara poza"
-        imageView.image = #imageLiteral(resourceName: "chitanta")
+       imageView.image = #imageLiteral(resourceName: "chitanta")
     }
     
     func selectCurrentCategory(){
         for item in categoryViewArray{
             if let textLabel = item.subviews[1] as? UILabel{
-                if textLabel.text! == currentCategory?.rawValue {
+                if textLabel.text! == expenseRecieve!.category!.rawValue {
                     item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 }
             }
@@ -100,18 +119,7 @@ class EditViewController: UIViewController , setAmountFromConverter {
             if item == thisView {
                 item.layer.borderColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
                 if let label = item.subviews[1] as? UILabel{
-                    switch label.text! {
-                    case "Income" : currentCategory = .Income
-                    case "Food" : currentCategory = .Food
-                    case "Car" : currentCategory = .Car
-                    case "Clothes" : currentCategory = .Clothes
-                    case "Savings" : currentCategory = .Savings
-                    case "Health" : currentCategory = .Health
-                    case "Beauty" : currentCategory = .Beauty
-                    case "Travel" : currentCategory = .Travel
-                    default:
-                        currentCategory = .Income
-                    }
+                    expenseRecieve!.category = CategoryEnum(rawValue: label.text!)!
                     print("AddExpense -> User selected \(currentCategory!) for this expense")
                 }
             }else{
@@ -121,46 +129,20 @@ class EditViewController: UIViewController , setAmountFromConverter {
     }
     
     @objc private func saveClick(){
-        if checkInputs() {
-            let newExpense = Expense(date:dataPicker.date ,amount:Float(amount.text!)!,category:currentCategory!,details:detailsInput.text!,image:imagePath ?? "Fara poza")
-            LocalDataBase.deleteExpense(cell!.date!)
-            var userInfo = LocalDataBase.getUserInfo()
-            if userInfo != nil{
-                userInfo!.expenses.append(newExpense)
-                if LocalDataBase.updateUserInfo(for: userInfo!){
-                    print("AddExpense -> Succesfull update info for \(userInfo!.name)")
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
-                    NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
-                    _ = navigationController?.popToRootViewController(animated: true)
-                }else{
-                    print("AddExpense -> Didnt update info for \(userInfo!.name)")
-                }
-            }else{
-                print("AddExpense -> I dont recieve info about current user , sorry")
-            }
+        if amount.text!.count > 0 {
+            expenseRecieve?.amount = Float(amount.text!)!
+        }else{
+            expenseRecieve?.amount = -1
+        }
+        expenseRecieve?.details = detailsInput.text ?? ""
+        expenseRecieve?.date = dataPicker.date
+        
+        let errorMessage = editViewModel.isExpenseValid(expense: expenseRecieve!,img : imageView.image!)
+        if errorMessage.count<1 {
             _ = navigationController?.popViewController(animated: true)
+        }else{
+            AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
         }
-    }
-    
-    private func checkInputs() -> Bool{
-        var allowSave = true
-        var errorMesage = ""
-        if currentCategory == nil {
-            allowSave = false
-            errorMesage.append("Select one category.\n")
-        }
-        if !Validations.amountValid(amount.text!){
-            allowSave = false
-            errorMesage.append("Get amount for this expense.\n")
-        }
-        if detailsInput.text!.count == 0 {
-            allowSave = false
-            errorMesage.append("Please, get some details about this expense.\n")
-        }
-        if errorMesage.count > 0 {
-            AlertService.showAlert(style: .alert, title: "Error", message: errorMesage)
-        }
-        return allowSave
     }
     
 }
@@ -187,20 +169,17 @@ extension EditViewController : UIImagePickerControllerDelegate , UINavigationCon
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let editedImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage{
-            print("incarc imaginea din edited")
-            imageView.image = editedImage
-            imagePath = Utils.saveImageToDocumentDirectory(image : editedImage)
+            let editedImageResized = Utils.ResizeImage(image: editedImage)
+            DispatchQueue.main.async {
+                self.imageView.image = editedImageResized
+            }
             
         }else if let originalImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
-            print("incarc imaginea din original")
-            imageView.image = originalImage
-            imagePath = Utils.saveImageToDocumentDirectory(image : originalImage)
+            let originalImageResized = Utils.ResizeImage(image: originalImage)
+            DispatchQueue.main.async {
+                self.imageView.image = originalImageResized
+            }
         }
-        print(imagePath!)
         dismiss(animated: true)
     }
-    
-    ///
-    
-    
 }

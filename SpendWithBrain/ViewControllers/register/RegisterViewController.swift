@@ -14,6 +14,9 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passField: UITextField!
+    
+    var registerViewModel = RegisterViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeViewsInLoginScreen();
@@ -38,40 +41,13 @@ class RegisterViewController: UIViewController {
     }
 
     @IBAction func registerUser(_ sender: UIButton) {
-        if checkInptus() {
-            let newUser = User(password: passField.text!, name: nameField.text!)
-            let email = emailField.text!
-            if(LocalDataBase.createUser(for: email, userData: newUser)){
-                let storyboard = UIStoryboard(name: "Login", bundle: nil)
-                let vc = storyboard.instantiateViewController(withIdentifier: "Login") as UIViewController
-                present(vc, animated: true, completion: nil)
-            }else{
-                print("register error")
-            }
-            
+        let (errorTitle,errorMessage) = registerViewModel.isInputsValid(email: emailField.text, password: passField.text, name: nameField.text)
+        if errorMessage.count > 0 {
+            AlertService.showAlert(style: .alert, title: errorTitle, message: errorMessage)
         }else{
-            print("invalid data")
+            let storyboard = UIStoryboard(name: "Login", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "Login") as UIViewController
+            present(vc, animated: true, completion: nil)
         }
-    }
-    
-    private func checkInptus() -> Bool{
-        var ok = true
-        var errorMessage = ""
-        if !Validations.nameValid(name: nameField.text!){
-            ok = false
-            errorMessage.append("Name can only contains letters.\n")
-        }
-        if !Validations.emailValid(email: emailField.text!){
-            ok = false
-            errorMessage.append("Get correct email.\n")
-        }
-        if !Validations.passValid(pass: passField.text!){
-            ok = false
-            errorMessage.append("The password must contain a small letter, a capital letter, a digit and a special sign(Contain more than 8 character)")
-        }
-        if errorMessage.count>0{
-            AlertService.showAlert(style: .alert, title: "Error", message: errorMessage)
-        }
-        return ok
     }
 }

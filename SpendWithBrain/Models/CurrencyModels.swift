@@ -25,6 +25,8 @@ struct Rates : Decodable {
         return ["RON","EUR","USD","MDL","UAH","RUB"]
     }
     
+    
+    
     static func getImg(for curr : Int) -> UIImage {
         let array = getStrArray()
         switch array[curr] {
@@ -63,11 +65,24 @@ struct Rates : Decodable {
     }
 }
 
-enum Currency {
-    case RON
-    case EUR
-    case USD
-    case RUB
-    case UAH
-    case MDL
+enum Currency : Int {
+    case RON = 0
+    case EUR = 1
+    case USD = 2
+    case MDL = 3
+    case UAH = 4
+    case RUB = 5
+    
+    static func getName(_ nr : Int) -> String {
+        switch nr {
+        case 0: return "RON"
+        case 1: return "EUR"
+        case 2: return "USD"
+        case 3: return "MDL"
+        case 4: return "UAH"
+        case 5: return "RUB"
+        default:
+            return ""
+        }
+    }
 }

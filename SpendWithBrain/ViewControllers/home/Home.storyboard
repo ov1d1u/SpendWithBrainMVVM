@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gcz-tN-C6f">
-    <device id="retina6_5" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="gcz-tN-C6f">
+    <device id="retina6_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
@@ -127,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YZz-rO-WzU">
-                                <rect key="frame" x="41.333333333333343" y="100" width="331.33333333333326" height="32"/>
+                                <rect key="frame" x="41.333333333333343" y="100" width="331.33333333333326" height="29"/>
                                 <segments>
                                     <segment title="This week"/>
                                     <segment title="This month"/>
@@ -138,27 +139,27 @@
                                     <action selector="segmentChange:" destination="eah-9Z-BqK" eventType="valueChanged" id="lTd-tH-noz"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDb-61-2Wc">
-                                <rect key="frame" x="41.333333333333336" y="151" width="42.000000000000007" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total expensed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDb-61-2Wc">
+                                <rect key="frame" x="41.333333333333343" y="148" width="116" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lW8-4X-kxt" userLabel="soldForSelectedTime">
-                                <rect key="frame" x="330.66666666666669" y="151" width="42" height="21"/>
+                                <rect key="frame" x="330.66666666666669" y="148" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0X-PB-04r" customClass="PieChartView" customModule="Charts">
-                                <rect key="frame" x="72.666666666666657" y="192.00000000000003" width="268.66666666666674" height="268.66666666666674"/>
+                                <rect key="frame" x="72.666666666666657" y="189.00000000000003" width="268.66666666666674" height="268.66666666666674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="g0X-PB-04r" secondAttribute="height" multiplier="1:1" id="DdN-ZU-a3d"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="DHL-RB-wXe">
-                                <rect key="frame" x="20.666666666666657" y="468.66666666666674" width="372.66666666666674" height="336.33333333333326"/>
+                                <rect key="frame" x="20.666666666666657" y="465.66666666666674" width="372.66666666666674" height="339.33333333333326"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="custom" rowHeight="100" id="tkG-GF-B2A" customClass="CustomTableViewCell" customModule="SpendWithBrain" customModuleProvider="target">
@@ -168,6 +169,16 @@
                                             <rect key="frame" x="0.0" y="0.0" width="372.66666666666674" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Bc-sS-voR" customClass="UIButton">
+                                                    <rect key="frame" x="375.66666666666669" y="5" width="90" height="90"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="9Bc-sS-voR" secondAttribute="height" multiplier="1:1" id="KMF-R3-dos"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="deleteClick:" destination="tkG-GF-B2A" eventType="touchUpInside" id="erx-it-w2g"/>
+                                                    </connections>
+                                                </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbh-GR-sjN" userLabel="container">
                                                     <rect key="frame" x="5" y="5" width="362.66666666666669" height="90"/>
                                                     <subviews>
@@ -236,12 +247,15 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="9Bc-sS-voR" firstAttribute="height" secondItem="pbh-GR-sjN" secondAttribute="height" id="8F4-a8-nKT"/>
                                                 <constraint firstItem="pbh-GR-sjN" firstAttribute="top" secondItem="oK5-LT-KuB" secondAttribute="top" constant="5" id="BFs-2a-vxm"/>
+                                                <constraint firstItem="9Bc-sS-voR" firstAttribute="centerY" secondItem="pbh-GR-sjN" secondAttribute="centerY" id="G2N-62-kL3"/>
                                                 <constraint firstItem="pbh-GR-sjN" firstAttribute="centerY" secondItem="oK5-LT-KuB" secondAttribute="centerY" id="dgy-SY-vDS"/>
                                                 <constraint firstItem="pbh-GR-sjN" firstAttribute="centerX" secondItem="oK5-LT-KuB" secondAttribute="centerX" id="hE1-6a-eDa"/>
                                                 <constraint firstAttribute="bottom" secondItem="pbh-GR-sjN" secondAttribute="bottom" constant="5" id="ouc-li-dti"/>
                                                 <constraint firstItem="pbh-GR-sjN" firstAttribute="leading" secondItem="oK5-LT-KuB" secondAttribute="leading" constant="5" id="s39-Wo-hhJ"/>
                                                 <constraint firstAttribute="trailing" secondItem="pbh-GR-sjN" secondAttribute="trailing" constant="5" id="xwV-BF-pj4"/>
+                                                <constraint firstItem="9Bc-sS-voR" firstAttribute="leading" secondItem="pbh-GR-sjN" secondAttribute="trailing" constant="8" id="ydP-cS-Bc5"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -249,6 +263,7 @@
                                             <outlet property="category" destination="lZr-D8-vAm" id="2ey-4Y-kZE"/>
                                             <outlet property="containerView" destination="pbh-GR-sjN" id="2MB-7e-88R"/>
                                             <outlet property="dateOfExp" destination="QKS-N8-eA7" id="YlE-2L-I8z"/>
+                                            <outlet property="deleteBtn" destination="9Bc-sS-voR" id="X3e-j4-BQf"/>
                                             <outlet property="imgCat" destination="sw0-NS-Et8" id="tBb-qh-T8V"/>
                                             <outlet property="incExp" destination="gkf-DX-WeS" id="6X2-Ob-lGh"/>
                                             <outlet property="soldAfterExp" destination="VGb-Md-mEh" id="skN-qb-npD"/>

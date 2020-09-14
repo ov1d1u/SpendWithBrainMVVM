@@ -32,21 +32,15 @@ class Navigation: UITabBarController {
     }
     
     @objc func goToEdit(_ notification: Notification) {
-        if let recievedCell = notification.userInfo!["cell"] as? CustomTableViewCell{
+        if let exp = notification.userInfo!["expense"] as? Expense{
             let vc = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "edit") as! EditViewController
-            vc.cell = recievedCell
+            vc.expenseRecieve = exp
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
     class func presentConverter() -> ConverterViewController {
         let vc = UIStoryboard(name: "Converter", bundle: nil).instantiateViewController(withIdentifier: "Converter") as! ConverterViewController
-        return vc
-    }
-    
-    class func getEditViewController(_ cell : CustomTableViewCell) -> EditViewController{
-        let vc = UIStoryboard(name: "Edit", bundle: nil).instantiateViewController(withIdentifier: "edit") as! EditViewController
-        vc.cell = cell
         return vc
     }
 }

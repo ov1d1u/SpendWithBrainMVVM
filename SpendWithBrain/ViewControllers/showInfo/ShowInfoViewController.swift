@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ShowInfoViewController: UIViewController{
     
@@ -19,45 +20,48 @@ class ShowInfoViewController: UIViewController{
     @IBOutlet weak var details: UILabel!
     @IBOutlet weak var photoImg: UIImageView!
     
-    private var cell : CustomTableViewCell?
+    var expense : Expense?
+    var showInfoViewModel = ShowInfoViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        if cell != nil {
-            catImg.image = cell?.imgCat.image
-            catLbl.text = cell?.category.text
-            details.text = cell?.details
-            let amountTxt = cell!.amount.text!
-            let absValAmount = abs(Double(amountTxt)!)
-            amount.text = String(absValAmount)
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "yyyy-MM-dd at HH:mm"
-            date.text = String(dateFormat.string(from: (cell?.date)!))
-            photoImg.image = Utils.getImage(imageName: (cell?.imagePath)!)
-        }
+        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        customize()
+    }
+    
+    private func customize(){
         stackCat.backgroundColor = #colorLiteral(red: 0.9607843137, green: 0.9529411765, blue: 0.9529411765, alpha: 1)
         stackCat.layer.cornerRadius = 4
         stackCat.layer.borderWidth = 1
         stackCat.layer.borderColor = #colorLiteral(red: 0.05566834658, green: 0.7084309459, blue: 0.5218427777, alpha: 1)
         container.layer.cornerRadius = 5
         container.backgroundColor = #colorLiteral(red: 1, green: 0.9764705882, blue: 0.9764705882, alpha: 1)
+        catImg.image = CategoryEnum.getCategoryImage(for: (expense?.category)!)
+        catLbl.text = expense?.category?.rawValue
+        date.text = showInfoViewModel.getDateFormatForInfo(date: (expense?.date)!)
+        amount.text = String((expense?.amount.rounded(toPlaces: 2))!)
+        details.text = expense?.details
+        let uid = Auth.auth().currentUser!.uid
+        let ref = Storage.storage().reference().child("\(uid)/\(expense!.image)")
+        ref.getData(maxSize: 1 * 2000 * 2000) { data, error in
+            if error != nil {
+                self.photoImg.image = #imageLiteral(resourceName: "chitanta")
+            } else {
+                self.photoImg.image = UIImage(data: data!)
+            }
+        }
     }
     
-    func setData(_ cell : CustomTableViewCell){
-        self.cell = cell
-    }
     @IBAction func deleteClick(_ sender: UIButton) {
-        Utils.deleteDirectory(directoryName: (cell?.imagePath)!)
-        LocalDataBase.deleteExpense((cell?.date)!)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshUserData"), object: nil)
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "refreshExpenseScreen"), object: nil)
+        showInfoViewModel.deleteThisExpense(expense: expense!)
         dismiss(animated: true)
     }
     
     @IBAction func editClick(_ sender: UIButton) {
-        NotificationCenter.default.post(name: Notification.Name(rawValue: "editOpen"), object: nil, userInfo : ["cell" : cell!])
-        //let editVC = Navigation.getEditViewController(cell!)
-        //present(editVC,animated: true)
-        //self.navigationController?.pushViewController(editVC, animated: true)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "editOpen"), object: nil, userInfo : ["expense" : expense!])
         dismiss(animated: true)
     }
     
@@ -65,6 +69,4 @@ class ShowInfoViewController: UIViewController{
         dismiss(animated: true)
     }
     
-    
-
 }
