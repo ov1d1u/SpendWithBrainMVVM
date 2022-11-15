@@ -16,7 +16,7 @@ class LocalDataBase{
     }
     
     static func getName() -> String{
-        return defaults.string(forKey: "name")!
+        return defaults.string(forKey: "name") ?? ""
     }
     
     static func setSold(_ sold : Float) {

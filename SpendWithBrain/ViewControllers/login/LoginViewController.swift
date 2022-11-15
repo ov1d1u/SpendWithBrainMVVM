@@ -8,7 +8,7 @@
 
 import UIKit
 import TextFieldEffects
-import FirebaseDatabase
+import Firebase
 
 class LoginViewController: UIViewController , LoginNavProtocol{
     

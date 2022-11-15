@@ -27,24 +27,27 @@ class HomeViewModel {
     var delegate : RefreshViewModelDelegate?
     var delegateGreeting : ShowGreetingMessage?
     
+
     func initializeUser(){
-        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value) { (snapShot) in
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value, with: { snp in
             self.expenses.removeAll()
-            for expense in snapShot.value as? [String : AnyObject] ?? [:] {
+            for (key, expenseAny) in snp.value as? NSDictionary ?? [:] {
                 //get date
+                guard let expense = expenseAny as? NSDictionary else { continue }
                 let addedDateFormatter = DateFormatter()
                 addedDateFormatter.dateFormat = "yyyy-MM-d HH:mm:ss Z"
-                let date = addedDateFormatter.date(from: expense.value["date"]! as! String)!
+                guard let dateString = expense["date"] as? String else { continue }
+                let date = addedDateFormatter.date(from: dateString)!
                 //get amount
-                let amountNumber = (expense.value["amount"]!)! as! NSNumber
+                let amountNumber = (expense["amount"])! as! NSNumber
                 //get category
-                let categoryRaw = (expense.value["category"]!)! as! String
+                let categoryRaw = (expense["category"])! as! String
                 let category = CategoryEnum.init(rawValue: categoryRaw)!
                 //get details and image
-                let details = (expense.value["details"]!)! as! String
-                let image = (expense.value["image"]!)! as! String
+                let details = (expense["details"])! as! String
+                let image = (expense["image"])! as! String
                 //add to expense array
-                self.expenses.append(Expense(expense.key,date, amountNumber.floatValue, category, details, image))
+                self.expenses.append(Expense(key as! String,date, amountNumber.floatValue, category, details, image))
             }
             print(self.expenses)
             self.setModel()
@@ -53,8 +56,7 @@ class HomeViewModel {
                 self.delegateGreeting?.showGreeting()
             }
             CustomNotifications.shared.createNotification(self.expenses.sold)
-        }
-        
+        })
     }
     
     func setModel(){
@@ -106,11 +108,12 @@ class HomeViewModel {
                     arrayOfEntryNegative.append(BarChartDataEntry(x: Double(index), y: currentSpends[index]))
                 }
             }
-            let chartDataSetPos = BarChartDataSet(values: arrayOfEntryPositive, label: "Positive balance")
-            let chartDataSetNeg = BarChartDataSet(values: arrayOfEntryNegative, label: "Negative balance")
-            chartDataSetPos.setColor(#colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1))
-            chartDataSetNeg.setColor(#colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1))
-            return BarChartData(dataSets: [chartDataSetPos,chartDataSetNeg])
+        
+        let chartDataSetPos = BarChartDataSet(entries: arrayOfEntryPositive, label: "Positive balance")
+        let chartDataSetNeg = BarChartDataSet(entries: arrayOfEntryNegative, label: "Negative balance")
+        chartDataSetPos.setColor(#colorLiteral(red: Float(0.4666666687), green: Float(0.7647058964), blue: Float(0.2666666806), alpha: Float(0)))
+        chartDataSetNeg.setColor(#colorLiteral(red: Float(0.7450980544), green: Float(0.1568627506), blue: Float(0.07450980693), alpha: Float(1)))
+        return BarChartData(dataSets: [chartDataSetPos,chartDataSetNeg])
     }
     
     private func getArrayMonth() -> [String]{

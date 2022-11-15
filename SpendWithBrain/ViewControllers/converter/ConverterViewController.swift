@@ -119,9 +119,9 @@ class ConverterViewController: UIViewController {
     }
     
     private func requestToBNR(){
-        Alamofire.request("https://romanian-exchange-rate-bnr-api.herokuapp.com/api/latest", method: .get, parameters: ["access_key":"f7dbe1842278-43779b"]).responseJSON{ (response)-> Void in
-            if response.result.value != nil {
-                if let data = response.data{
+            AF.request("https://romanian-exchange-rate-bnr-api.herokuapp.com/api/latest?access_key=f7dbe1842278-43779b", method: .get).responseJSON{ (response)-> Void in
+                if response.value != nil {
+                if let data = response.data {
                     let result = try! JSONDecoder().decode(Result.self, from: data)
                     self.converterViewModel.rates = result.rates
                 }}else {

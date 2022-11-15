@@ -25,28 +25,30 @@ class ExpenseViewModel{
     var delegate : RefreshViewModelDelegate?
     
     func initUserAndPeriod(forPeriod period : Int){
-        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value) { (snapShot) in
+        Database.database().reference().child("users/\(Auth.auth().currentUser!.uid)/expenses").observe(.value, with: { snp in
             self.allExpenses.removeAll()
-            for expense in snapShot.value as? [String : AnyObject] ?? [:] {
+            for (key, expenseAny) in snp.value as? NSDictionary ?? [:] {
                 //get date
+                guard let expense = expenseAny as? NSDictionary else { continue }
                 let addedDateFormatter = DateFormatter()
                 addedDateFormatter.dateFormat = "yyyy-MM-d HH:mm:ss Z"
-                let date = addedDateFormatter.date(from: expense.value["date"]! as! String)!
+                guard let dateString = expense["date"] as? String else { continue }
+                let date = addedDateFormatter.date(from: dateString)!
                 //get amount
-                let amountNumber = (expense.value["amount"]!)! as! NSNumber
+                let amountNumber = (expense["amount"])! as! NSNumber
                 //get category
-                let categoryRaw = (expense.value["category"]!)! as! String
+                let categoryRaw = (expense["category"])! as! String
                 let category = CategoryEnum.init(rawValue: categoryRaw)!
                 //get details and image
-                let details = (expense.value["details"]!)! as! String
-                let image = (expense.value["image"]!)! as! String
+                let details = (expense["details"])! as! String
+                let image = (expense["image"])! as! String
                 //add to expense array
-                self.allExpenses.append(Expense(expense.key,date, amountNumber.floatValue, category, details, image))
+                self.allExpenses.append(Expense(key as! String, date, amountNumber.floatValue, category, details, image))
             }
             print(self.allExpenses)
             self.setModel(forPeriod: period)
             self.delegate?.refreshUI()
-        }
+        })
     }
     
     
@@ -95,12 +97,14 @@ class ExpenseViewModel{
             }
         }
         
-        let pieDataSet = PieChartDataSet(values: dataEntries, label: "")
+        let pieDataSet = PieChartDataSet(entries: dataEntries, label: "")
         let formatter = NumberFormatter()
         formatter.numberStyle = .percent
         formatter.maximumFractionDigits = 1
         formatter.multiplier = 1.0
-        pieDataSet.valueFormatter = formatter as? IValueFormatter
+        if let formatterV = formatter as? ValueFormatter {
+            pieDataSet.valueFormatter = formatterV
+        }
         pieDataSet.valueTextColor = .black
         pieDataSet.colors = usedColors
         let pieChartData = PieChartData(dataSet: pieDataSet)

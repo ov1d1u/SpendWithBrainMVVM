@@ -38,7 +38,6 @@
 		94C35A8324ED46480032443F /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C35A8224ED46480032443F /* Register.storyboard */; };
 		94C35A8624ED4B9E0032443F /* Reset.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94C35A8524ED4B9E0032443F /* Reset.storyboard */; };
 		94C35A8A24ED4C0A0032443F /* ResetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94C35A8924ED4C0A0032443F /* ResetViewController.swift */; };
-		94D03F6025064FFE00D302F4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94D03F5F25064FFE00D302F4 /* GoogleService-Info.plist */; };
 		94D80FCA24F6451E006F40FC /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D80FC924F6451E006F40FC /* CustomTableViewCell.swift */; };
 		94D80FCC24F65722006F40FC /* ShowInfo.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94D80FCB24F65722006F40FC /* ShowInfo.storyboard */; };
 		94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D80FCD24F657C9006F40FC /* ShowInfoViewController.swift */; };
@@ -55,6 +54,7 @@
 		94F613DC24EFA785006AA093 /* Converter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 94F613DB24EFA785006AA093 /* Converter.storyboard */; };
 		94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613DF24EFE150006AA093 /* ExpensesViewController.swift */; };
 		94FA121F2509047F008846E5 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FA121E2509047F008846E5 /* UserNotifications.swift */; };
+		B837E53D2923A3F30051349E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B837E53C2923A3F30051349E /* GoogleService-Info.plist */; };
 		CE16C24E41A9CF2E73341346 /* Pods_SpendWithBrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +93,6 @@
 		94C35A8224ED46480032443F /* Register.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Register.storyboard; sourceTree = "<group>"; };
 		94C35A8524ED4B9E0032443F /* Reset.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Reset.storyboard; sourceTree = "<group>"; };
 		94C35A8924ED4C0A0032443F /* ResetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetViewController.swift; sourceTree = "<group>"; };
-		94D03F5F25064FFE00D302F4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "SpendWithBrain/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		94D80FC924F6451E006F40FC /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
 		94D80FCB24F65722006F40FC /* ShowInfo.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ShowInfo.storyboard; sourceTree = "<group>"; };
 		94D80FCD24F657C9006F40FC /* ShowInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInfoViewController.swift; sourceTree = "<group>"; };
@@ -112,6 +111,7 @@
 		94F613DB24EFA785006AA093 /* Converter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Converter.storyboard; sourceTree = "<group>"; };
 		94F613DF24EFE150006AA093 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		94FA121E2509047F008846E5 /* UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
+		B837E53C2923A3F30051349E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -280,7 +280,7 @@
 		94E1834F24EBFEB9002D3E2A = {
 			isa = PBXGroup;
 			children = (
-				94D03F5F25064FFE00D302F4 /* GoogleService-Info.plist */,
+				B837E53C2923A3F30051349E /* GoogleService-Info.plist */,
 				94382EFE24EC0E1D00DECE94 /* Default-568h@2x.png */,
 				94E1836E24EC0307002D3E2A /* .gitignore */,
 				94E1835A24EBFEB9002D3E2A /* SpendWithBrain */,
@@ -397,8 +397,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				94D03F6025064FFE00D302F4 /* GoogleService-Info.plist in Resources */,
 				94E1836F24EC0307002D3E2A /* .gitignore in Resources */,
+				B837E53D2923A3F30051349E /* GoogleService-Info.plist in Resources */,
 				94ACC95024EEBD26002B9E5B /* Home.storyboard in Resources */,
 				94E1836624EBFEBB002D3E2A /* LaunchScreen.storyboard in Resources */,
 				94E1836324EBFEBB002D3E2A /* Assets.xcassets in Resources */,
