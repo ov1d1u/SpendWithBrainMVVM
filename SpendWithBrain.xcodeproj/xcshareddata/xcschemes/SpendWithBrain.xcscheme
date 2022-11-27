@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+SpendWithBrain.xcodeproj/xcshareddata/xcschemes/SpendWithBrain.xcscheme<?xml version="1.0" encoding="UTF-8"?>
 <Scheme
    LastUpgradeVersion = "1410"
    version = "1.3">
@@ -29,11 +29,10 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
+            skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "A5591580293117D6005CB53D"
+               BlueprintIdentifier = "A5563E7B2931191700C3BB8F"
                BuildableName = "SpendWithBrainTests.xctest"
                BlueprintName = "SpendWithBrainTests"
                ReferencedContainer = "container:SpendWithBrain.xcodeproj">

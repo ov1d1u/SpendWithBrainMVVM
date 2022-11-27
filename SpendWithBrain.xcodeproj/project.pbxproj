@@ -55,9 +55,11 @@
 		94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F613DF24EFE150006AA093 /* ExpensesViewController.swift */; };
 		94FA121F2509047F008846E5 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FA121E2509047F008846E5 /* UserNotifications.swift */; };
 		9B876C82FA6ABFEF9E320FB0 /* Pods_SpendWithBrainTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BD315B20F7E5AFD1FC5B47 /* Pods_SpendWithBrainTests.framework */; };
+		A51DD4BE2933F0F600580B6B /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51DD4BD2933F0F600580B6B /* StringProtocol.swift */; };
 		A5563E8629311CBF00C3BB8F /* EmailValidationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */; };
 		A5563E882933A22600C3BB8F /* PasswordValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */; };
 		A5563E8A2933A48500C3BB8F /* UsernameValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */; };
+		A5683B6F29340DB200785F62 /* CNPValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */; };
 		B837E53D2923A3F30051349E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B837E53C2923A3F30051349E /* GoogleService-Info.plist */; };
 		CE16C24E41A9CF2E73341346 /* Pods_SpendWithBrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */; };
 /* End PBXBuildFile section */
@@ -127,10 +129,12 @@
 		94F613DB24EFA785006AA093 /* Converter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Converter.storyboard; sourceTree = "<group>"; };
 		94F613DF24EFE150006AA093 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		94FA121E2509047F008846E5 /* UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
+		A51DD4BD2933F0F600580B6B /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
 		A5563E7C2931191700C3BB8F /* SpendWithBrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpendWithBrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationsTest.swift; sourceTree = "<group>"; };
 		A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationsTests.swift; sourceTree = "<group>"; };
 		A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidationsTests.swift; sourceTree = "<group>"; };
+		A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNPValidationsTests.swift; sourceTree = "<group>"; };
 		B837E53C2923A3F30051349E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9BD315B20F7E5AFD1FC5B47 /* Pods_SpendWithBrainTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpendWithBrainTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -245,6 +249,7 @@
 		94C2A6E024ED6CC0009D644F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A51DD4BC2933F0E300580B6B /* Extensions */,
 				94C2A6E124ED6CC9009D644F /* Validations.swift */,
 				94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */,
 				946F9E6224F8DCB500DD26B4 /* Utils.swift */,
@@ -362,9 +367,18 @@
 			path = converter;
 			sourceTree = "<group>";
 		};
+		A51DD4BC2933F0E300580B6B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A51DD4BD2933F0F600580B6B /* StringProtocol.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		A5563E7D2931191700C3BB8F /* SpendWithBrainTests */ = {
 			isa = PBXGroup;
 			children = (
+				A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */,
 				A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */,
 				A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */,
 				A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */,
@@ -592,6 +606,7 @@
 				94E1835E24EBFEB9002D3E2A /* LoginViewController.swift in Sources */,
 				947C755B25026D0400F874E6 /* ShowInfoViewModel.swift in Sources */,
 				946D52AB25011DBA008A3C5F /* ConverterViewModel.swift in Sources */,
+				A51DD4BE2933F0F600580B6B /* StringProtocol.swift in Sources */,
 				94D80FCE24F657C9006F40FC /* ShowInfoViewController.swift in Sources */,
 				94F3E6A8250F5DDA0068AFC1 /* Protocols.swift in Sources */,
 				94237A0C24EFE64C00E86D32 /* MainScreenViewController.swift in Sources */,
@@ -621,6 +636,7 @@
 			files = (
 				A5563E8A2933A48500C3BB8F /* UsernameValidationsTests.swift in Sources */,
 				A5563E8629311CBF00C3BB8F /* EmailValidationsTest.swift in Sources */,
+				A5683B6F29340DB200785F62 /* CNPValidationsTests.swift in Sources */,
 				A5563E882933A22600C3BB8F /* PasswordValidationsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
