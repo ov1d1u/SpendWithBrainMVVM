@@ -135,6 +135,7 @@
                                     <segment title="This year"/>
                                 </segments>
                                 <color key="tintColor" name="greyMid"/>
+                                <color key="selectedSegmentTintColor" systemColor="tintColor"/>
                                 <connections>
                                     <action selector="segmentChange:" destination="eah-9Z-BqK" eventType="valueChanged" id="lTd-tH-noz"/>
                                 </connections>
