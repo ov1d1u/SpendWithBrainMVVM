@@ -21,6 +21,9 @@ def shared_pods
   pod "TinyConstraints"
   pod 'SideMenu'
   pod 'ValidationComponents'
+  pod 'Swinject', '~> 2.7.0'
+  pod 'SwinjectStoryboard', '~> 2.2.0'
+  pod 'XMLMapper', '~> 2.0.0'
 end
 
 target 'SpendWithBrain' do
@@ -37,4 +40,6 @@ target 'SpendWithBrainTests' do
 
   # Pods for SpendWithBrainTests
   shared_pods
+  
+  pod 'MockingbirdFramework', '~> 0.20'
 end

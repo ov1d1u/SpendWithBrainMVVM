@@ -24,3 +24,12 @@ DerivedData/
 
 ## Gcc Patch
 /*.gcno
+
+# Generated
+*.generated.swift
+
+# Binaries
+Pods/MockingbirdFramework/mockingbird/bin/
+
+# Caches
+**/*.xcodeproj/MockingbirdCache/

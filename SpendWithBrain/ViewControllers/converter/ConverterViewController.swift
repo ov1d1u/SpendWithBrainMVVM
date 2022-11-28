@@ -22,21 +22,11 @@ class ConverterViewController: UIViewController {
     
     weak var delegate : setAmountFromConverter?
     var infoFromEdit : String?
-    var converterViewModel : ConverterViewModel!{
-        didSet{
-            leftDrop.text = Currency.getName(converterViewModel.leftSelectedCurrency.rawValue)
-            rightDrop.text = Currency.getName(converterViewModel.rightSelectedCurrency.rawValue)
-            lefticon.image = Rates.getImg(for: converterViewModel.leftSelectedCurrency.rawValue)
-            rightIcon.image = Rates.getImg(for: converterViewModel.rightSelectedCurrency.rawValue)
-            leftInput.text = converterViewModel.leftInput
-            rightInput.text = converterViewModel.rightInput
-        }
-    }
+    var converterViewModel : ConverterViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         customizeScreen()
-        converterViewModel = ConverterViewModel()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,23 +49,39 @@ class ConverterViewController: UIViewController {
         infoFromEdit = amountTxt
     }
     
-    private func customizeScreen(){
-        requestToBNR()
+    private func updateUI() {
+        self.leftDrop.text = self.converterViewModel.leftSelectedCurrency.rawValue
+        self.rightDrop.text = self.converterViewModel.rightSelectedCurrency.rawValue
+        self.lefticon.image = self.converterViewModel.leftSelectedCurrency.getImg()
+        self.rightIcon.image = self.converterViewModel.rightSelectedCurrency.getImg()
+        self.leftInput.text = self.converterViewModel.leftInput
+        self.rightInput.text = self.converterViewModel.rightInput
+    }
+    
+    private func customizeScreen() {
+        converterViewModel.getRates { dataSet in
+            if dataSet == nil {
+                self.alertErrorShow()
+            }
+            
+            self.updateUI()
+        }
         self.title = "Converter"
+        
         //left drop down setup
-        leftDrop.optionArray = Rates.getStrArray()
+        leftDrop.optionArray = Currency.allCases.map { $0.rawValue }
         leftDrop.listDidDisappear{
             if let index = self.leftDrop.selectedIndex {
-                self.converterViewModel.leftSelectedCurrency = Rates.getType(for: index)
+                self.converterViewModel.leftSelectedCurrency = Currency(rawValue: self.leftDrop.optionArray[index]) ?? .RON
             }
         }
         leftInput.addTarget(self, action: #selector(leftFieldDidChange(_:)), for: .editingChanged)
         
         //right drop down setup
-        rightDrop.optionArray = Rates.getStrArray()
+        rightDrop.optionArray = Currency.allCases.map { $0.rawValue }
         rightDrop.listDidDisappear{
             if let index = self.rightDrop.selectedIndex {
-                self.converterViewModel.rightSelectedCurrency = Rates.getType(for: index)
+                self.converterViewModel.rightSelectedCurrency = Currency(rawValue: self.rightDrop.optionArray[index]) ?? .RON
             }
         }
         rightInput.addTarget(self, action: #selector(rightFieldDidChange(_:)), for: .editingChanged)
@@ -93,6 +99,7 @@ class ConverterViewController: UIViewController {
         if ((textField.text?.count)!>0){
             converterViewModel.leftInput = textField.text!
             converterViewModel.didSetLeft(str: textField.text!)
+            updateUI()
         }
     }
     
@@ -100,6 +107,7 @@ class ConverterViewController: UIViewController {
         if ((textField.text?.count)!>0){
             converterViewModel.rightInput = textField.text!
             converterViewModel.didSetRight(str: textField.text!)
+            updateUI()
         }
         
     }
@@ -109,6 +117,7 @@ class ConverterViewController: UIViewController {
     }
     @IBAction func rightDropHide(_ sender: Any) {
         rightDrop.hideList()
+        updateUI()
     }
     
     @IBAction func showDrop(_ sender: Any) {
@@ -116,18 +125,7 @@ class ConverterViewController: UIViewController {
     }
     @IBAction func hideDrop(_ sender: Any) {
         leftDrop.hideList()
-    }
-    
-    private func requestToBNR(){
-            AF.request("https://romanian-exchange-rate-bnr-api.herokuapp.com/api/latest?access_key=f7dbe1842278-43779b", method: .get).responseJSON{ (response)-> Void in
-                if response.value != nil {
-                if let data = response.data {
-                    let result = try! JSONDecoder().decode(Result.self, from: data)
-                    self.converterViewModel.rates = result.rates
-                }}else {
-                self.alertErrorShow()
-            }
-        }
+        updateUI()
     }
     
     func alertErrorShow(){

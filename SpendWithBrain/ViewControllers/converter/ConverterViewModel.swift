@@ -9,7 +9,8 @@
 import Foundation
 import Alamofire
 
-struct ConverterViewModel {
+class ConverterViewModel {
+    let currencyConverter: CurrencyConverter!
     
     var leftInput : String = ""
     var rightInput : String = ""
@@ -26,7 +27,7 @@ struct ConverterViewModel {
         }
     }
     
-    var rates : Rates?
+    var rates : [Rate]?
     
     var currentRate : Double {
         get{
@@ -38,7 +39,22 @@ struct ConverterViewModel {
         }
     }
     
-    mutating func didSetRight(str :String){
+    init(currencyConverter: CurrencyConverter!) {
+        self.currencyConverter = currencyConverter
+    }
+    
+    func getRates(_ completion: @escaping ((DataSet?) -> Void)) {
+        currencyConverter.getRates { dataSet in
+            if let dataSet = dataSet {
+                self.rates = dataSet.rates
+            }
+            DispatchQueue.main.async {
+                completion(dataSet)
+            }
+        }
+    }
+    
+    func didSetRight(str :String){
         if str.count>0{
             self.leftInput = String(abs((Double(str)!*currentRate)).rounded(toPlaces: 3))
         }else{
@@ -46,7 +62,7 @@ struct ConverterViewModel {
         }
     }
     
-    mutating func didSetLeft(str :String){
+    func didSetLeft(str :String){
         if str.count>0{
             self.rightInput = String(abs((Double(str)!/currentRate)).rounded(toPlaces: 3))
         }else{

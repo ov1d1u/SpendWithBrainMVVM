@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -56,10 +56,20 @@
 		94FA121F2509047F008846E5 /* UserNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94FA121E2509047F008846E5 /* UserNotifications.swift */; };
 		9B876C82FA6ABFEF9E320FB0 /* Pods_SpendWithBrainTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C9BD315B20F7E5AFD1FC5B47 /* Pods_SpendWithBrainTests.framework */; };
 		A51DD4BE2933F0F600580B6B /* StringProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A51DD4BD2933F0F600580B6B /* StringProtocol.swift */; };
+		A5563B2F293508B400286434 /* Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563B2E293508B400286434 /* Bundle.swift */; };
+		A5563B3029350D9900286434 /* SpendWithBrainTests-SpendWithBrainMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66410F93BEF6825B8534EA8C /* SpendWithBrainTests-SpendWithBrainMocks.generated.swift */; };
 		A5563E8629311CBF00C3BB8F /* EmailValidationsTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */; };
 		A5563E882933A22600C3BB8F /* PasswordValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */; };
 		A5563E8A2933A48500C3BB8F /* UsernameValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */; };
 		A5683B6F29340DB200785F62 /* CNPValidationsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */; };
+		A5683B71293421D500785F62 /* CurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B70293421D500785F62 /* CurrencyConverter.swift */; };
+		A5683B742934A74500785F62 /* SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B732934A74500785F62 /* SwinjectStoryboard.swift */; };
+		A5683B782934D48700785F62 /* CurrencyConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B772934D48700785F62 /* CurrencyConverterTests.swift */; };
+		A5683B7B2934D67500785F62 /* SwinjectStoryboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B7A2934D67500785F62 /* SwinjectStoryboard.swift */; };
+		A5683B7E2934DED800785F62 /* CurrencyModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBCB2624F1AFEC008C3A2D /* CurrencyModels.swift */; };
+		A5683B802934E3C300785F62 /* NetworkCurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B7F2934E3C300785F62 /* NetworkCurrencyConverter.swift */; };
+		A5683B842934E40700785F62 /* DummyCurrencyConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5683B812934E3F400785F62 /* DummyCurrencyConverter.swift */; };
+		A5683B89293503D200785F62 /* ConversionData.xml in Resources */ = {isa = PBXBuildFile; fileRef = A5683B88293503D200785F62 /* ConversionData.xml */; };
 		B837E53D2923A3F30051349E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B837E53C2923A3F30051349E /* GoogleService-Info.plist */; };
 		CE16C24E41A9CF2E73341346 /* Pods_SpendWithBrain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */; };
 /* End PBXBuildFile section */
@@ -77,6 +87,7 @@
 /* Begin PBXFileReference section */
 		0A8CA0AC0E4369361B8B3F44 /* Pods-SpendWithBrain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpendWithBrain.debug.xcconfig"; path = "Target Support Files/Pods-SpendWithBrain/Pods-SpendWithBrain.debug.xcconfig"; sourceTree = "<group>"; };
 		2DC59A227FC9B3B7E14B6C9D /* Pods-SpendWithBrainTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpendWithBrainTests.release.xcconfig"; path = "Target Support Files/Pods-SpendWithBrainTests/Pods-SpendWithBrainTests.release.xcconfig"; sourceTree = "<group>"; };
+		66410F93BEF6825B8534EA8C /* SpendWithBrainTests-SpendWithBrainMocks.generated.swift */ = {isa = PBXFileReference; explicitFileType = sourcecode.swift; name = "SpendWithBrainTests-SpendWithBrainMocks.generated.swift"; path = "MockingbirdMocks/SpendWithBrainTests-SpendWithBrainMocks.generated.swift"; sourceTree = "<group>"; };
 		6B28E23F580D9CFD18C9B59D /* Pods-SpendWithBrainTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpendWithBrainTests.debug.xcconfig"; path = "Target Support Files/Pods-SpendWithBrainTests/Pods-SpendWithBrainTests.debug.xcconfig"; sourceTree = "<group>"; };
 		73CB149B77EFEE6F80BDCE09 /* Pods_SpendWithBrain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpendWithBrain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DBBCB2624F1AFEC008C3A2D /* CurrencyModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyModels.swift; sourceTree = "<group>"; };
@@ -130,11 +141,19 @@
 		94F613DF24EFE150006AA093 /* ExpensesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpensesViewController.swift; sourceTree = "<group>"; };
 		94FA121E2509047F008846E5 /* UserNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNotifications.swift; sourceTree = "<group>"; };
 		A51DD4BD2933F0F600580B6B /* StringProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringProtocol.swift; sourceTree = "<group>"; };
+		A5563B2E293508B400286434 /* Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bundle.swift; sourceTree = "<group>"; };
 		A5563E7C2931191700C3BB8F /* SpendWithBrainTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpendWithBrainTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidationsTest.swift; sourceTree = "<group>"; };
 		A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordValidationsTests.swift; sourceTree = "<group>"; };
 		A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsernameValidationsTests.swift; sourceTree = "<group>"; };
 		A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CNPValidationsTests.swift; sourceTree = "<group>"; };
+		A5683B70293421D500785F62 /* CurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverter.swift; sourceTree = "<group>"; };
+		A5683B732934A74500785F62 /* SwinjectStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwinjectStoryboard.swift; sourceTree = "<group>"; };
+		A5683B772934D48700785F62 /* CurrencyConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyConverterTests.swift; sourceTree = "<group>"; };
+		A5683B7A2934D67500785F62 /* SwinjectStoryboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwinjectStoryboard.swift; sourceTree = "<group>"; };
+		A5683B7F2934E3C300785F62 /* NetworkCurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkCurrencyConverter.swift; sourceTree = "<group>"; };
+		A5683B812934E3F400785F62 /* DummyCurrencyConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyCurrencyConverter.swift; sourceTree = "<group>"; };
+		A5683B88293503D200785F62 /* ConversionData.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ConversionData.xml; sourceTree = "<group>"; };
 		B837E53C2923A3F30051349E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C9BD315B20F7E5AFD1FC5B47 /* Pods_SpendWithBrainTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpendWithBrainTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -159,6 +178,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11753206150ACBC87CAE095D /* Generated Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				66410F93BEF6825B8534EA8C /* SpendWithBrainTests-SpendWithBrainMocks.generated.swift */,
+			);
+			name = "Generated Mocks";
+			sourceTree = "<group>";
+		};
 		553172FD1AB3E9E225AABB0D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -249,11 +276,13 @@
 		94C2A6E024ED6CC0009D644F /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				A5683B722934A72E00785F62 /* DI */,
 				A51DD4BC2933F0E300580B6B /* Extensions */,
 				94C2A6E124ED6CC9009D644F /* Validations.swift */,
 				94ACC94324EE4EA9002B9E5B /* LocalDataBase.swift */,
 				946F9E6224F8DCB500DD26B4 /* Utils.swift */,
 				94FA121E2509047F008846E5 /* UserNotifications.swift */,
+				A5683B7F2934E3C300785F62 /* NetworkCurrencyConverter.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -324,6 +353,7 @@
 				94E1835924EBFEB9002D3E2A /* Products */,
 				553172FD1AB3E9E225AABB0D /* Pods */,
 				EFE34A3B6683BF82BD85F376 /* Frameworks */,
+				11753206150ACBC87CAE095D /* Generated Mocks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,6 +382,7 @@
 		94E1836D24EC007B002D3E2A /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				A5683B87293503B700785F62 /* TestsFixtures */,
 				94E1835B24EBFEB9002D3E2A /* AppDelegate.swift */,
 			);
 			path = "Supporting files";
@@ -371,6 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				A51DD4BD2933F0F600580B6B /* StringProtocol.swift */,
+				A5563B2E293508B400286434 /* Bundle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -378,12 +410,40 @@
 		A5563E7D2931191700C3BB8F /* SpendWithBrainTests */ = {
 			isa = PBXGroup;
 			children = (
+				A5683B772934D48700785F62 /* CurrencyConverterTests.swift */,
 				A5683B6E29340DB200785F62 /* CNPValidationsTests.swift */,
 				A5563E892933A48500C3BB8F /* UsernameValidationsTests.swift */,
 				A5563E872933A22600C3BB8F /* PasswordValidationsTests.swift */,
 				A5563E8529311CBF00C3BB8F /* EmailValidationsTest.swift */,
 			);
 			path = SpendWithBrainTests;
+			sourceTree = "<group>";
+		};
+		A5683B722934A72E00785F62 /* DI */ = {
+			isa = PBXGroup;
+			children = (
+				A5683B792934D66000785F62 /* Testing */,
+				A5683B732934A74500785F62 /* SwinjectStoryboard.swift */,
+				A5683B70293421D500785F62 /* CurrencyConverter.swift */,
+			);
+			path = DI;
+			sourceTree = "<group>";
+		};
+		A5683B792934D66000785F62 /* Testing */ = {
+			isa = PBXGroup;
+			children = (
+				A5683B7A2934D67500785F62 /* SwinjectStoryboard.swift */,
+				A5683B812934E3F400785F62 /* DummyCurrencyConverter.swift */,
+			);
+			path = Testing;
+			sourceTree = "<group>";
+		};
+		A5683B87293503B700785F62 /* TestsFixtures */ = {
+			isa = PBXGroup;
+			children = (
+				A5683B88293503D200785F62 /* ConversionData.xml */,
+			);
+			path = TestsFixtures;
 			sourceTree = "<group>";
 		};
 		EFE34A3B6683BF82BD85F376 /* Frameworks */ = {
@@ -422,6 +482,7 @@
 			buildConfigurationList = A5563E822931191700C3BB8F /* Build configuration list for PBXNativeTarget "SpendWithBrainTests" */;
 			buildPhases = (
 				C84705BB5AB223EC48D73A82 /* [CP] Check Pods Manifest.lock */,
+				0368E675836A8C8A3A10BFFE /* Generate Mockingbird Mocks */,
 				A5563E782931191700C3BB8F /* Sources */,
 				A5563E792931191700C3BB8F /* Frameworks */,
 				A5563E7A2931191700C3BB8F /* Resources */,
@@ -501,12 +562,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5683B89293503D200785F62 /* ConversionData.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0368E675836A8C8A3A10BFFE /* Generate Mockingbird Mocks */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Mockingbird Mocks";
+			outputPaths = (
+				"$(SRCROOT)/MockingbirdMocks/SpendWithBrainTests-SpendWithBrainMocks.generated.swift",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\n\n# Prevent Xcode 13 from running this script while indexing.\n[[ \"${ACTION}\" == \"indexbuild\" ]] && exit 0\n\n\"${SRCROOT}/Pods/MockingbirdFramework/mockingbird\" generate --targets \"SpendWithBrain\" --disable-swiftlint --outputs \"${SRCROOT}/MockingbirdMocks/SpendWithBrainTests-SpendWithBrainMocks.generated.swift\"\n";
+		};
 		5B27C1181B41C46D18559FC1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -596,11 +674,13 @@
 				94C2A6DF24ED649D009D644F /* Expense.swift in Sources */,
 				7DBBCB2724F1AFEC008C3A2D /* CurrencyModels.swift in Sources */,
 				947C755F25027D8F00F874E6 /* EditViewModel.swift in Sources */,
+				A5683B802934E3C300785F62 /* NetworkCurrencyConverter.swift in Sources */,
 				94D80FD224F664F1006F40FC /* ShowInfo.swift in Sources */,
 				9414E2192501142E0093E3A8 /* ResetViewModel.swift in Sources */,
 				9491DA3624FF7329006697AF /* HomeViewModel.swift in Sources */,
 				94F613E024EFE150006AA093 /* ExpensesViewController.swift in Sources */,
 				94ACC94C24EEBA46002B9E5B /* MenuViewController.swift in Sources */,
+				A5683B71293421D500785F62 /* CurrencyConverter.swift in Sources */,
 				94C35A8124ED46220032443F /* RegisterViewController.swift in Sources */,
 				94D80FCA24F6451E006F40FC /* CustomTableViewCell.swift in Sources */,
 				94E1835E24EBFEB9002D3E2A /* LoginViewController.swift in Sources */,
@@ -618,6 +698,7 @@
 				947ACF7A24F7E86200FEB842 /* setAmountFromConverter.swift in Sources */,
 				94237A1124EFF9D000E86D32 /* AddExpenseViewController.swift in Sources */,
 				94ACC94724EE96EA002B9E5B /* HomeViewController.swift in Sources */,
+				A5683B742934A74500785F62 /* SwinjectStoryboard.swift in Sources */,
 				9414E21325010A0E0093E3A8 /* LoginViewModel.swift in Sources */,
 				94237A0E24EFEB2500E86D32 /* Navigation.swift in Sources */,
 				94E1835C24EBFEB9002D3E2A /* AppDelegate.swift in Sources */,
@@ -634,10 +715,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A5563B3029350D9900286434 /* SpendWithBrainTests-SpendWithBrainMocks.generated.swift in Sources */,
 				A5563E8A2933A48500C3BB8F /* UsernameValidationsTests.swift in Sources */,
+				A5563B2F293508B400286434 /* Bundle.swift in Sources */,
+				A5683B7E2934DED800785F62 /* CurrencyModels.swift in Sources */,
 				A5563E8629311CBF00C3BB8F /* EmailValidationsTest.swift in Sources */,
+				A5683B782934D48700785F62 /* CurrencyConverterTests.swift in Sources */,
 				A5683B6F29340DB200785F62 /* CNPValidationsTests.swift in Sources */,
+				A5683B842934E40700785F62 /* DummyCurrencyConverter.swift in Sources */,
 				A5563E882933A22600C3BB8F /* PasswordValidationsTests.swift in Sources */,
+				A5683B7B2934D67500785F62 /* SwinjectStoryboard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
